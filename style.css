@@ -160,8 +160,8 @@ body.has-wallpaper #bg-grad {
 /* === BOOST SPÉCIAL MODE CLAIR === */
 /* Encore plus visible sur saison Default en mode clair */
 body.mode-light.season-default .orb {
-  filter: blur(15px);
-  opacity: 1;
+  filter: blur(8px);
+  opacity: 50%;
 }
 
 
@@ -440,46 +440,6 @@ body.mode-light.season-default .orb {
   .weather-card{ width: calc(100vw - 40px) !important; }
 }
 
-
-/* ═══════════════════════════════════════════════════
-   WIDGET BOARD
-═══════════════════════════════════════════════════ */
-#widget-board{display:none;flex-direction:row;gap:10px;flex-wrap:wrap;justify-content:center;max-width:900px;width:100%;animation:fadeInUp .5s ease both;}
-#widget-board.active{display:flex;}
-
-.widget-card{
-  width:186px;
-  background:var(--panel);
-  border:1px solid var(--bd2);
-  border-top:3px solid var(--o);
-  border-radius:var(--r1);
-  overflow:hidden;cursor:grab;user-select:none;
-  box-shadow:var(--s1);
-  transition:transform .18s,box-shadow .18s,opacity .18s;
-}
-.widget-card:active{cursor:grabbing;}
-.widget-card:hover{box-shadow:var(--s2),0 0 14px var(--og);transform:translateY(-2px);}
-.widget-card.drag-over{transform:scale(1.04);box-shadow:0 0 0 2px var(--o),var(--s2);}
-.widget-card.dragging{opacity:.38;transform:scale(.96);}
-
-.wc-header{display:flex;align-items:center;justify-content:space-between;padding:7px 10px 6px;font-size:11px;font-weight:800;color:var(--t1);background:var(--panel2);border-bottom:1px solid var(--bd);letter-spacing:.3px;}
-.wc-drag{cursor:grab;color:var(--t3);font-size:12px;line-height:1;letter-spacing:1.5px;}
-.wc-close{cursor:pointer;color:var(--t3);font-size:10px;padding:2px 5px;border-radius:3px;transition:background .12s,color .12s;}
-.wc-close:hover{background:rgba(255,102,0,.14);color:var(--o);}
-.wc-body{padding:9px 12px 12px;}
-.wc-loading,.wc-error{color:var(--t2);font-size:11px;text-align:center;padding:10px 0;}
-.wc-city{font-size:10px;color:var(--t2);margin-bottom:1px;font-weight:600;}
-.wc-temp{font-size:36px;font-weight:300;color:var(--t1);line-height:1;letter-spacing:-1px;font-variant-numeric:tabular-nums;}
-.wc-cond{font-size:11px;color:var(--t1);margin:4px 0 6px;opacity:.85;}
-.wc-details{display:flex;gap:8px;font-size:10px;color:var(--t2);}
-.wc-update{font-size:9px;color:var(--t3);margin-top:6px;cursor:pointer;transition:color .12s;}
-.wc-update:hover{color:var(--o);}
-.line-brand{display:flex;flex-direction:column;align-items:center;gap:3px;margin:3px 0 9px;}
-.line-icon-wrap{width:44px;height:44px;border-radius:11px;background:#06C755;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 12px rgba(6,199,85,.35);}
-.line-brand-name{font-size:12px;font-weight:800;color:var(--t1);}
-.line-open-btn{display:block;background:#06C755;color:white;text-align:center;padding:8px 12px;border-radius:var(--r0);text-decoration:none;font-size:12px;font-weight:800;transition:opacity .15s,transform .13s;margin-bottom:6px;box-shadow:0 2px 8px rgba(6,199,85,.30);}
-.line-open-btn:hover{opacity:.88;transform:scale(.98);}
-.line-note{font-size:9px;color:var(--t2);text-align:center;line-height:1.5;opacity:.75;}
 
 /* ═══════════════════════════════════════════════════
    MAIN — centré, horloge simple flottante

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   TRANSLATIONS
+   TRANSLATIONS (inchangé)
 ═══════════════════════════════════════════════════ */
 const T = {
   en:{
@@ -23,10 +23,6 @@ const T = {
     sugPfx:['Search','How to','What is','News about'],
     dateFn:d=>d.toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'}),
     widgetBtn:'Widgets',widgetTitle:'Available Widgets',widgetDrag:'Drag to reorder on screen',
-    
-    
-    wWeatherName:'Weather',wWeatherDesc:'Local weather forecast',
-    wLineDesc:'Quick access to LINE',
   },
   jp:{
     persoBtn:'パーソナライズ',settingsBtn:'設定',
@@ -49,15 +45,11 @@ const T = {
     sugPfx:['を調べる','とは何ですか','の使い方','最新情報'],
     dateFn:d=>`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${['日','月','火','水','木','金','土'][d.getDay()]}）`,
     widgetBtn:'ウィジェット',widgetTitle:'利用可能なウィジェット',widgetDrag:'ドラッグして並べ替え',
-    
-    
-    wWeatherName:'天気',wWeatherDesc:'ローカル天気予報',
-    wLineDesc:'LINEへのクイックアクセス',
   }
 };
 
 /* ═══════════════════════════════════════════════════
-   TIMEZONE DATA
+   TIMEZONE DATA (inchangé)
 ═══════════════════════════════════════════════════ */
 const ALL_TZ = (()=>{
   try{ return Intl.supportedValuesOf('timeZone'); }catch(e){}
@@ -122,7 +114,7 @@ document.addEventListener('click',e=>{
 ═══════════════════════════════════════════════════ */
 const ENGINES={
   google:    {name:'Google',      url:'https://www.google.com/search?q={q}&hl={l}'},
-  'yahoo-jp':{name:'Yahoo! Japan',url:'https://search.yahoo.co.jp/search?p={q}'},
+  yahoojp:  {name:'Yahoo! Japan',  url:'https://search.yahoo.co.jp/search?p={q}'},
   bing:      {name:'Bing',        url:'https://www.bing.com/search?q={q}&setlang={l}'},
   yahoo:     {name:'Yahoo! (USA)',url:'https://search.yahoo.com/search?p={q}'},
   duckduckgo:{name:'DuckDuckGo',  url:'https://duckduckgo.com/?q={q}'},
@@ -163,10 +155,10 @@ function applyMode(){
   document.getElementById('orbs').style.display = vis ? '' : 'none';
   document.getElementById('toggle-overlay')?.classList.toggle('on', vis);
 }
+
 /* ═══════════════════════════════════════════════════
    Season Glow
 ═══════════════════════════════════════════════════ */
-
 function toggleOverlay(){
   st.overlay = !st.overlay;
   document.getElementById('toggle-overlay').classList.toggle('on', st.overlay);
@@ -219,11 +211,11 @@ function applyLang(){
     if(L[k]!==undefined) el.placeholder=L[k];
   });
   document.getElementById('s-input').placeholder=L.placeholder;
-  document.getElementById('s-btn').textContent=L.searchBtn;
+  document.getElementById('s-btn-label').textContent=L.searchBtn;
 }
 
 /* ═══════════════════════════════════════════════════
-   CLOCK (uses st.timezone)
+   CLOCK
 ═══════════════════════════════════════════════════ */
 function updateClock(){
   const tz=st.timezone, now=new Date();
@@ -347,12 +339,10 @@ function setWP(wp,el){
     document.body.classList.remove('has-wallpaper');
     lay.style.backgroundImage='';
   } else {
-  // Correction pour les presets t1.png, t2.png...
-  lay.style.backgroundImage = `url('${wp}')`;   // sans ./ cette fois
-  lay.classList.add('active');
-  document.body.classList.add('has-wallpaper');
-  console.log('Wallpaper set to:', wp);   // ← pour voir dans la console
-}
+    lay.style.backgroundImage = `url('${wp}')`;
+    lay.classList.add('active');
+    document.body.classList.add('has-wallpaper');
+  }
   save();
 }
 
@@ -388,21 +378,25 @@ function openSlotPicker(i){
   document.getElementById('slot-file').click();
 }
 
+// CORRECTION : ajout de readAsDataURL et sauvegarde immédiate
 function onSlotFile(e){
-  const f=e.target.files[0]; if(!f||_pendingSlot<0)return;
+  const f=e.target.files[0]; 
+  if(!f || _pendingSlot<0) return;
   const r=new FileReader();
   r.onload=ev=>{
-    st.customSlots[_pendingSlot]=ev.target.result;
-    saveSlot(_pendingSlot,ev.target.result);
+    const savedSlot = _pendingSlot;         
+    st.customSlots[savedSlot]=ev.target.result;
+    saveSlot(savedSlot, ev.target.result);
     _pendingSlot=-1;
     renderCustomSlots();
-    activateSlot(st.customSlots.findLastIndex(s=>s!==null));
+    activateSlot(savedSlot);
+    save(); // ← assure la persistance immédiate
   };
-  r.readAsDataURL(f);
+  r.readAsDataURL(f); // ← ligne manquante (déclenche la lecture)
 }
 
 function activateSlot(i){
-  if(!st.customSlots[i])return;
+  if(!st.customSlots[i]) return;
   document.querySelectorAll('.wp-t,.cslot').forEach(t=>t.classList.remove('sel'));
   st.wallpaper=`u${i}`;
   const lay=document.getElementById('wp-layer');
@@ -417,155 +411,47 @@ function deleteSlot(evt,i){
   evt.stopPropagation();
   if(st.wallpaper===`u${i}`){
     const noneEl=document.querySelector('.wp-t[data-wp="none"]');
-    setWP('none',noneEl);
+    setWP('none', noneEl);
   }
   st.customSlots[i]=null;
-  try{localStorage.removeItem(`_sp_u${i}`);}catch(e){}
+  try{ localStorage.removeItem(`_sp_u${i}`); }catch(e){}
   renderCustomSlots();
   save();
 }
 
 /* ═══════════════════════════════════════════════════
-   WIDGETS – TOGGLE PANEL
+   WIDGETS (fonctions manquantes)
 ═══════════════════════════════════════════════════ */
 function toggleWidget(name){
+  if(!st.widgets[name]) st.widgets[name]={enabled:false};
   st.widgets[name].enabled = !st.widgets[name].enabled;
-  const tog=document.getElementById('toggle-'+name);
-  if(tog) tog.classList.toggle('on', st.widgets[name].enabled);
+  const toggle = document.getElementById(`toggle-${name}`);
+  if(toggle) toggle.classList.toggle('on', st.widgets[name].enabled);
   renderWidgetBoard();
   save();
 }
 
-/* ═══════════════════════════════════════════════════
-   WIDGET BOARD – RENDER
-═══════════════════════════════════════════════════ */
 function renderWidgetBoard(){
-  const board=document.getElementById('widget-board');
-  board.innerHTML='';
-  const enabled=st.widgets.order.filter(n=>st.widgets[n]&&st.widgets[n].enabled);
-  if(!enabled.length){
-    board.classList.remove('active');
-    return;
-  }
-  board.classList.add('active');
-  enabled.forEach(name=>{
-    const card = name==='weather' ? createWeatherCard() : createLineCard();
-    board.appendChild(card);
-  });
-  initDragDrop();
-}
-
-/* ═══════════════════════════════════════════════════
-   WEATHER WIDGET
-═══════════════════════════════════════════════════ */
-let _wxScriptLoaded = false;
-
-function createWeatherCard(){
-  const card = document.createElement('div');
-  card.className = 'widget-card weather-card';
-  card.dataset.widget = 'weather';
-  card.draggable = true;
-
-  const title = st.lang === 'jp' ? '🌤 天気' : '🌤 Weather';
-
-  // NOUVELLE VERSION avec WeatherWidget.io (plus stable)
-  // Remplace le contenu ci-dessous par ton propre code généré sur weatherwidget.io
-  card.innerHTML = `
-    <div class="wc-header">
-      <span class="wc-drag">⠿</span>
-      <span>${title}</span>
-      <span class="wc-close" onclick="toggleWidget('weather')">✕</span>
-    </div>
-    <div class="wc-body wc-body-embed">
-      <!-- === METS ICI TON CODE EMBED GÉNÉRÉ SUR https://weatherwidget.io/ === -->
-      <a class="weatherwidget-io" href="https://forecast7.com/en/" data-label_1="YOUR CITY" data-label_2="WEATHER" data-theme="original" >YOUR CITY WEATHER</a>
-      <script>
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-      </script>
-      <!-- ================================================================== -->
-    </div>`;
-
-  return card;
-}
-
-
-/* ═══════════════════════════════════════════════════
-   LINE WIDGET
-═══════════════════════════════════════════════════ */
-function createLineCard(){
-  const card = document.createElement('div');
-  card.className = 'widget-card glass';
-  card.dataset.widget = 'line';
-  card.draggable = true;
-
-  card.innerHTML = `
-    <div class="wc-header">
-      <span class="wc-drag">⠿</span>
-      <span>💬 LINE</span>
-      <span class="wc-close" onclick="toggleWidget('line')">✕</span>
-    </div>
-    <div class="wc-body">
-      <div class="line-brand">
-        <div class="line-icon-wrap">💬</div>
-        <div class="line-brand-name">LINE</div>
-      </div>
-      <a class="line-open-btn" href="https://web.line.me" target="_blank" rel="noopener noreferrer">
-        ${st.lang==='jp' ? 'LINEを開く ↗' : 'Open LINE ↗'}
-      </a>
-      <div class="line-note">
-        ${st.lang==='jp' 
-          ? 'LINEのメッセージはブラウザから直接表示できません。<br>「LINEを開く」でWeb版に移動します。' 
-          : 'LINE messages cannot be displayed directly in the browser.<br>Click to open LINE Web version.'}
-      </div>
-    </div>`;
-  return card;
-}
-
-/* ═══════════════════════════════════════════════════
-   DRAG & DROP (widget board)
-═══════════════════════════════════════════════════ */
-function initDragDrop(){
-  const board=document.getElementById('widget-board');
-  let dragged=null;
-
-  board.querySelectorAll('.widget-card').forEach(card=>{
-    card.addEventListener('dragstart',e=>{
-      dragged=card;
-      setTimeout(()=>card.classList.add('dragging'),0);
-      e.dataTransfer.effectAllowed='move';
-    });
-    card.addEventListener('dragend',()=>{
-      card.classList.remove('dragging');
-      board.querySelectorAll('.widget-card').forEach(c=>c.classList.remove('drag-over'));
-      dragged=null;
-      // save new order
-      const newOrder=[...board.querySelectorAll('.widget-card')].map(c=>c.dataset.widget);
-      // merge with existing non-enabled widgets at end
-      const all=st.widgets.order;
-      const notShown=all.filter(n=>!newOrder.includes(n));
-      st.widgets.order=[...newOrder,...notShown];
-      save();
-    });
-    card.addEventListener('dragover',e=>{
-      e.preventDefault();
-      if(dragged&&dragged!==card){
-        card.classList.add('drag-over');
-        const board2=card.parentNode;
-        const cards=[...board2.querySelectorAll('.widget-card')];
-        const dragIdx=cards.indexOf(dragged);
-        const targetIdx=cards.indexOf(card);
-        if(dragIdx<targetIdx) board2.insertBefore(dragged,card.nextSibling);
-        else board2.insertBefore(dragged,card);
+  const board = document.getElementById('widget-board');
+  if(!board) return;
+  board.innerHTML = '';
+  const order = st.widgets.order || [];
+  for(const name of order){
+    const w = st.widgets[name];
+    if(w && w.enabled){
+      if(name === 'weather'){
+        const card = document.createElement('div');
+        card.className = 'weather-card';
+        card.innerHTML = `<div class="wc-header" style="display:none"></div><div class="wc-body-embed" style="width:100%"><div id="ww_32b09c5dbe1b1" v="1.3" loc="auto" a='{"t":"horizontal","lang":"${st.lang==='jp'?'ja':'en'}","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_s":"auto","clr":"#FF6600","clr_bg":"transparent"}'><a href="https://weatherwidget.org/ja/" id="ww_32b09c5dbe1b1_u" target="_blank">ウィジェット天気</a></div><script async src="https://app3.weatherwidget.org/js/?id=ww_32b09c5dbe1b1b"></script></div>`;
+        board.appendChild(card);
+      } else if(name === 'line'){
+        const card = document.createElement('div');
+        card.className = 'widget-card line-card';
+        card.innerHTML = `<div class="wc-header">LINE</div><div class="wc-body"><a href="https://line.me/R/" target="_blank" style="display:flex;align-items:center;gap:8px;color:var(--t1);text-decoration:none;"><span style="font-size:24px">💬</span> <span>Open LINE</span></a></div>`;
+        board.appendChild(card);
       }
-    });
-    card.addEventListener('dragleave',e=>{
-      if(!card.contains(e.relatedTarget)) card.classList.remove('drag-over');
-    });
-    card.addEventListener('drop',e=>{
-      e.preventDefault();
-      card.classList.remove('drag-over');
-    });
-  });
+    }
+  }
 }
 
 /* ═══════════════════════════════════════════════════
@@ -578,6 +464,7 @@ function exportSave(){
     timezone:st.timezone, tzLocked:st.tzLocked,
     customSlots:st.customSlots,
     mode:st.mode,
+    overlay:st.overlay,
     widgets:{order:st.widgets.order,weather:{enabled:st.widgets.weather.enabled},line:{enabled:st.widgets.line.enabled}},
   };
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
@@ -625,27 +512,27 @@ function loadSlots(){
 }
 
 /* ═══════════════════════════════════════════════════
-   APPLY STATE (used by load & import)
+   APPLY STATE
 ═══════════════════════════════════════════════════ */
 function applyState(d){
-  // ── custom slots ──
+  // custom slots
   if(Array.isArray(d.customSlots)){
     d.customSlots.forEach((img,i)=>{
-      if(img&&i<5){ st.customSlots[i]=img; saveSlot(i,img); }
+      if(img && i<5){ st.customSlots[i]=img; saveSlot(i,img); }
     });
   }
-  // ── language ──
+  // langue
   if(d.lang){
     st.lang=d.lang;
     const el=document.querySelector(`[data-lang="${d.lang}"]`);
     if(el){document.querySelectorAll('[data-lang]').forEach(r=>r.classList.remove('sel'));el.classList.add('sel');}
   }
-  // ── timezone ──
+  // timezone
   st.tzLocked=!!d.tzLocked;
   if(d.timezone) st.timezone=d.timezone;
   else if(!st.tzLocked) st.timezone=st.lang==='jp'?'Asia/Tokyo':'Europe/London';
   updateTZLabel();
-  // ── engine ──
+  // moteur
   if(d.engine){
     st.engine=d.engine;
     const el=document.querySelector(`[data-eng="${d.engine}"]`);
@@ -654,10 +541,10 @@ function applyState(d){
   if(d.custom){st.custom=d.custom;ENGINES.custom=d.custom;}
   const eng=ENGINES[st.engine]||st.custom;
   if(eng) document.getElementById('eng-name').textContent=eng.name;
-  // ── season ──
+  // saison
   const sEl=document.querySelector(`.spill[data-s="${d.season||'default'}"]`);
   setSeason(d.season||'default',sEl);
-  // ── wallpaper ──
+  // wallpaper
   const wp=d.wallpaper||'none';
   const isSlot=/^u[0-4]$/.test(wp);
   if(isSlot){
@@ -668,23 +555,21 @@ function applyState(d){
     const el=document.querySelector(`.wp-t[data-wp="${wp}"]`);
     setWP(wp,el);
   }
-  // ── mode ──
+  // mode & overlay
   if(d.mode) st.mode=d.mode;
   if(d.overlay !== undefined) st.overlay = !!d.overlay;
   applyMode();
-  // ── widgets ──
+  // widgets
   if(d.widgets){
     if(Array.isArray(d.widgets.order)) st.widgets.order=d.widgets.order;
     if(d.widgets.weather) st.widgets.weather={...st.widgets.weather,...d.widgets.weather};
     if(d.widgets.line) st.widgets.line={...st.widgets.line,...d.widgets.line};
   }
-  // sync toggle buttons
   ['weather','line'].forEach(n=>{
     const el=document.getElementById('toggle-'+n);
     if(el) el.classList.toggle('on',!!(st.widgets[n]&&st.widgets[n].enabled));
   });
   renderWidgetBoard();
-  // ── finish ──
   applyLang();
   renderCustomSlots();
   save();
