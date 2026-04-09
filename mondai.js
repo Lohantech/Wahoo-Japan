@@ -22,8 +22,8 @@ const T = {
     modalCancel:'Cancel',modalSave:'Save',
     sugPfx:['Search','How to','What is','News about'],
     dateFn:d=>d.toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'}),
-    widgetBtn:'Widgets',widgetTitle:'Available Widgets',widgetDrag:'Drag to reorder on screen',
   },
+  
   jp:{
     persoBtn:'パーソナライズ',settingsBtn:'設定',
     seasonTitle:'季節テーマ',
@@ -44,7 +44,6 @@ const T = {
     modalCancel:'キャンセル',modalSave:'保存',
     sugPfx:['を調べる','とは何ですか','の使い方','最新情報'],
     dateFn:d=>`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${['日','月','火','水','木','金','土'][d.getDay()]}）`,
-    widgetBtn:'ウィジェット',widgetTitle:'利用可能なウィジェット',widgetDrag:'ドラッグして並べ替え',
   }
 };
 
@@ -289,10 +288,10 @@ document.addEventListener('click',e=>{if(!e.target.closest('#search-box')&&!e.ta
 ═══════════════════════════════════════════════════ */
 const SP={
   default:[],
-  printemps:['🌸','🌺','🌸','🌷','✿'],
+  printemps:['🌸','🌺','🌸','🌷','🌼'],
   ete:['☀️','✨','🌟','⭐','🌻'],
   automne:['🍂','🍁','🍂','🍁','🍃'],
-  hiver:['❄️','❅','❆','❄️','*'],
+  hiver:['❄️','🛷','☃️','❄️','⛄'],
 };
 function setSeason(name,el){
   document.querySelectorAll('.spill').forEach(p=>p.classList.remove('sel'));
@@ -420,41 +419,6 @@ function deleteSlot(evt,i){
 }
 
 /* ═══════════════════════════════════════════════════
-   WIDGETS (fonctions manquantes)
-═══════════════════════════════════════════════════ */
-function toggleWidget(name){
-  if(!st.widgets[name]) st.widgets[name]={enabled:false};
-  st.widgets[name].enabled = !st.widgets[name].enabled;
-  const toggle = document.getElementById(`toggle-${name}`);
-  if(toggle) toggle.classList.toggle('on', st.widgets[name].enabled);
-  renderWidgetBoard();
-  save();
-}
-
-function renderWidgetBoard(){
-  const board = document.getElementById('widget-board');
-  if(!board) return;
-  board.innerHTML = '';
-  const order = st.widgets.order || [];
-  for(const name of order){
-    const w = st.widgets[name];
-    if(w && w.enabled){
-      if(name === 'weather'){
-        const card = document.createElement('div');
-        card.className = 'weather-card';
-        card.innerHTML = `<div class="wc-header" style="display:none"></div><div class="wc-body-embed" style="width:100%"><div id="ww_32b09c5dbe1b1" v="1.3" loc="auto" a='{"t":"horizontal","lang":"${st.lang==='jp'?'ja':'en'}","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_s":"auto","clr":"#FF6600","clr_bg":"transparent"}'><a href="https://weatherwidget.org/ja/" id="ww_32b09c5dbe1b1_u" target="_blank">ウィジェット天気</a></div><script async src="https://app3.weatherwidget.org/js/?id=ww_32b09c5dbe1b1b"></script></div>`;
-        board.appendChild(card);
-      } else if(name === 'line'){
-        const card = document.createElement('div');
-        card.className = 'widget-card line-card';
-        card.innerHTML = `<div class="wc-header">LINE</div><div class="wc-body"><a href="https://line.me/R/" target="_blank" style="display:flex;align-items:center;gap:8px;color:var(--t1);text-decoration:none;"><span style="font-size:24px">💬</span> <span>Open LINE</span></a></div>`;
-        board.appendChild(card);
-      }
-    }
-  }
-}
-
-/* ═══════════════════════════════════════════════════
    EXPORT / IMPORT
 ═══════════════════════════════════════════════════ */
 function exportSave(){
@@ -559,17 +523,6 @@ function applyState(d){
   if(d.mode) st.mode=d.mode;
   if(d.overlay !== undefined) st.overlay = !!d.overlay;
   applyMode();
-  // widgets
-  if(d.widgets){
-    if(Array.isArray(d.widgets.order)) st.widgets.order=d.widgets.order;
-    if(d.widgets.weather) st.widgets.weather={...st.widgets.weather,...d.widgets.weather};
-    if(d.widgets.line) st.widgets.line={...st.widgets.line,...d.widgets.line};
-  }
-  ['weather','line'].forEach(n=>{
-    const el=document.getElementById('toggle-'+n);
-    if(el) el.classList.toggle('on',!!(st.widgets[n]&&st.widgets[n].enabled));
-  });
-  renderWidgetBoard();
   applyLang();
   renderCustomSlots();
   save();
