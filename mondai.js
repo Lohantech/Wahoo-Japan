@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   TRANSLATIONS (inchangé)
+   TRANSLATIONS
 ═══════════════════════════════════════════════════ */
 const T = {
   en:{
@@ -23,7 +23,6 @@ const T = {
     sugPfx:['Search','How to','What is','News about'],
     dateFn:d=>d.toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'}),
   },
-  
   jp:{
     persoBtn:'パーソナライズ',settingsBtn:'設定',
     seasonTitle:'季節テーマ',
@@ -48,7 +47,7 @@ const T = {
 };
 
 /* ═══════════════════════════════════════════════════
-   TIMEZONE DATA (inchangé)
+   TIMEZONE DATA
 ═══════════════════════════════════════════════════ */
 const ALL_TZ = (()=>{
   try{ return Intl.supportedValuesOf('timeZone'); }catch(e){}
@@ -377,7 +376,6 @@ function openSlotPicker(i){
   document.getElementById('slot-file').click();
 }
 
-// CORRECTION : ajout de readAsDataURL et sauvegarde immédiate
 function onSlotFile(e){
   const f=e.target.files[0]; 
   if(!f || _pendingSlot<0) return;
@@ -389,9 +387,9 @@ function onSlotFile(e){
     _pendingSlot=-1;
     renderCustomSlots();
     activateSlot(savedSlot);
-    save(); // ← assure la persistance immédiate
+    save();
   };
-  r.readAsDataURL(f); // ← ligne manquante (déclenche la lecture)
+  r.readAsDataURL(f);
 }
 
 function activateSlot(i){
@@ -479,24 +477,20 @@ function loadSlots(){
    APPLY STATE
 ═══════════════════════════════════════════════════ */
 function applyState(d){
-  // custom slots
   if(Array.isArray(d.customSlots)){
     d.customSlots.forEach((img,i)=>{
       if(img && i<5){ st.customSlots[i]=img; saveSlot(i,img); }
     });
   }
-  // langue
   if(d.lang){
     st.lang=d.lang;
     const el=document.querySelector(`[data-lang="${d.lang}"]`);
     if(el){document.querySelectorAll('[data-lang]').forEach(r=>r.classList.remove('sel'));el.classList.add('sel');}
   }
-  // timezone
   st.tzLocked=!!d.tzLocked;
   if(d.timezone) st.timezone=d.timezone;
   else if(!st.tzLocked) st.timezone=st.lang==='jp'?'Asia/Tokyo':'Europe/London';
   updateTZLabel();
-  // moteur
   if(d.engine){
     st.engine=d.engine;
     const el=document.querySelector(`[data-eng="${d.engine}"]`);
@@ -505,10 +499,8 @@ function applyState(d){
   if(d.custom){st.custom=d.custom;ENGINES.custom=d.custom;}
   const eng=ENGINES[st.engine]||st.custom;
   if(eng) document.getElementById('eng-name').textContent=eng.name;
-  // saison
   const sEl=document.querySelector(`.spill[data-s="${d.season||'default'}"]`);
   setSeason(d.season||'default',sEl);
-  // wallpaper
   const wp=d.wallpaper||'none';
   const isSlot=/^u[0-4]$/.test(wp);
   if(isSlot){
@@ -519,7 +511,6 @@ function applyState(d){
     const el=document.querySelector(`.wp-t[data-wp="${wp}"]`);
     setWP(wp,el);
   }
-  // mode & overlay
   if(d.mode) st.mode=d.mode;
   if(d.overlay !== undefined) st.overlay = !!d.overlay;
   applyMode();
