@@ -126,11 +126,6 @@ let st={
   customSlots:[null,null,null,null,null],
   mode:'light',
   overlay:true,
-  widgets:{
-    order:['weather','line'],
-    weather:{enabled:false},
-    line:{enabled:false},
-  },
 };
 let _pendingSlot=-1;
 
@@ -427,7 +422,6 @@ function exportSave(){
     customSlots:st.customSlots,
     mode:st.mode,
     overlay:st.overlay,
-    widgets:{order:st.widgets.order,weather:{enabled:st.widgets.weather.enabled},line:{enabled:st.widgets.line.enabled}},
   };
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
   const a=document.createElement('a');
@@ -458,11 +452,6 @@ function save(){
       timezone:st.timezone, tzLocked:st.tzLocked,
       mode:st.mode,
       overlay: st.overlay,
-      widgets:{
-        order:st.widgets.order,
-        weather:{enabled:st.widgets.weather.enabled},
-        line:{enabled:st.widgets.line.enabled},
-      },
     }));
   }catch(err){}
 }
