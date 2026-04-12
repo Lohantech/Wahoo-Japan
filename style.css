@@ -142,6 +142,11 @@ body.season-hiver #season-overlay{
     opacity:1;
 }
 
+body.mode-light.season-default .orb{
+    filter:blur(8px);
+    opacity:50%;
+}
+
 body.has-wallpaper #bg-grad{
     opacity:1;
 }
@@ -218,10 +223,7 @@ body.has-wallpaper
         opacity:0
     }
 }
-body.mode-light.season-default .orb{
-    filter:blur(8px);
-    opacity:50%;
-}
+
 
 #page{
     position:relative;
@@ -559,23 +561,23 @@ body.mode-light.season-default .orb{
 }
 
 .spill[data-s=default]{
-    background:linear-gradient(135deg,var(--o),var(--y));
+    background:linear-gradient(135deg, var(--o), var(--y));
 }
 
 .spill[data-s=printemps]{
-    background:linear-gradient(135deg,#f472b6,#c084fc);
+    background:linear-gradient(135deg, #f472b6, #c084fc);
 }
 
 .spill[data-s=ete]{
-    background:linear-gradient(135deg,#fbbf24,#f97316);
+    background:linear-gradient(135deg, #fbbf24, #f97316);
 }
 
 .spill[data-s=automne]{
-    background:linear-gradient(135deg,#ef4444,#d97706);
+    background:linear-gradient(135deg, #ef4444, #d97706);
 }
 
 .spill[data-s=hiver]{
-    background:linear-gradient(135deg,#7dd3fc,#bfdbfe);color:#0a2540;text-shadow:none;
+    background:linear-gradient(135deg, #7dd3fc, #bfdbfe); color:#0a2540; text-shadow:none;
 }
 
 #wp-grid {

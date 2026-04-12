@@ -145,7 +145,6 @@ function applyMode(){
   if(btn) btn.textContent = isLight ? '☀️' : '🌙';
   const vis = st.overlay;
   document.getElementById('season-overlay').style.display = vis ? '' : 'none';
-  document.getElementById('orbs').style.display = vis ? '' : 'none';
   document.getElementById('toggle-overlay')?.classList.toggle('on', vis);
 }
 
@@ -156,7 +155,6 @@ function toggleOverlay(){
   st.overlay = !st.overlay;
   document.getElementById('toggle-overlay').classList.toggle('on', st.overlay);
   document.getElementById('season-overlay').style.display = st.overlay ? '' : 'none';
-  document.getElementById('orbs').style.display = st.overlay ? '' : 'none';
   save();
 }
 
@@ -293,7 +291,6 @@ function setSeason(name,el){
   document.body.className=document.body.className.replace(/season-\S+/g,'').trim()+' season-'+name;
   if(st.wallpaper!=='none') document.body.classList.add('has-wallpaper');
   if(st.mode==='light') document.body.classList.add('mode-light');
-  st.season=name; spawnParticles(name); spawnOrbs(); save();
 }
 function spawnParticles(s){
   const c=document.getElementById('particles'); c.innerHTML='';
@@ -304,18 +301,6 @@ function spawnParticles(s){
     el.textContent=em[i%em.length];
     el.style.cssText=`left:${Math.random()*100}%;font-size:${12+Math.random()*16}px;animation-duration:${7+Math.random()*13}s;animation-delay:-${Math.random()*14}s;--dx:${(Math.random()-.5)*130}px;opacity:${.55+Math.random()*.45}`;
     c.appendChild(el);
-  }
-}
-function spawnOrbs(){
-  const c=document.getElementById('orbs'); c.innerHTML='';
-  const cs=getComputedStyle(document.body);
-  const cols=[cs.getPropertyValue('--orb1').trim(),cs.getPropertyValue('--orb2').trim(),cs.getPropertyValue('--orb3').trim()];
-  const count = st.season==='default'?5:7;
-  for(let i=0;i<count;i++){
-    const o=document.createElement('div'); o.className='orb';
-    const sz=160+Math.random()*260;
-    o.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${cols[i%3]};animation-duration:${16+Math.random()*22}s;animation-delay:-${Math.random()*20}s`;
-    c.appendChild(o);
   }
 }
 
@@ -519,7 +504,6 @@ function init(){
   }catch(e){
     applyState({});
   }
-  spawnOrbs();
   spawnParticles(st.season);
   updateClock();
 }
