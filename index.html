@@ -21,7 +21,7 @@
       <div id="logo-wrap">
         <img src="aero_touch/logo.png" type="images/png" alt="Logo" id="logo" onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex'">
         <div id="logo-fallback"></div>
-        <h1 style="color: #9b59b6; padding-left="10px"; font-size: 1.5rem;">BÊTA</h1>
+        <h1 style="color: #9b59b6; padding-left: 10px; font-size: 1.5rem;">BÊTA</h1>
       </div>
     </a>
     <div id="header-center">
@@ -29,7 +29,17 @@
       <div class="panel-wrap">
         <button class="hbtn" id="perso-btn" onclick="togglePanel('perso')" title="Personalise">🎨</button>
         <div class="dropdown" id="perso-panel">
+
           <div class="dropdown-inner">
+            
+          <div class="sep"></div>
+          <div class="dtitle" data-t="shortcutsTitle">Shortcuts</div>
+          <div id="shortcuts-list"></div>
+          <button class="action-row" id="add-shortcut-btn" onclick="openShortcutModal()">
+            <span class="ar-icon">➕</span>
+            <span data-t="addShortcut">Add a Shortcuts</span>
+          </button>
+
             <div class="dtitle" data-t="seasonTitle">Season Theme</div>
             <div id="season-grid">
               <div class="spill sel" data-s="default" onclick="setSeason('default',this)" data-t-inner="tDefault">Default</div>
@@ -42,6 +52,8 @@
             <div class="dtitle" data-t="wpTitle">Wallpaper</div>
             <div id="wp-grid">
               <div class="wp-t sel" data-wp="none" onclick="setWP('none',this)"><div class="wp-def" style="background:linear-gradient(135deg, #fff8f0, #ffe0c0)">🌸</div><div class="wp-lbl" data-t="wpDefault">Default</div></div>
+              <div class="wp-t" data-wp="picture/02.png" onclick="setWP('picture/02.png',this)"><img src="picture/02.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="wp-lbl">T1</div></div>
+              <div class="wp-t" data-wp="picture/03.jpeg" onclick="setWP('picture/03.jpeg',this)"><img src="picture/03.jpeg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="wp-lbl">T2</div></div>
               <div class="wp-t" data-wp="picture/04.jpg" onclick="setWP('picture/04.jpg',this)"><img src="picture/04.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="wp-lbl">T3</div></div>
               <div class="wp-t" data-wp="picture/05.jpg" onclick="setWP('picture/05.jpg',this)"><img src="picture/05.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="wp-lbl">T4</div></div>
               <div class="wp-t" data-wp="picture/06.jpeg" onclick="setWP('picture/06.jpeg',this)"><img src="picture/06.jpeg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="wp-lbl">T5</div></div>
@@ -92,6 +104,9 @@
         <div id="search-box"><input type="text" id="s-input" placeholder="Search…" autocomplete="off" oninput="handleInput()" onkeydown="if(event.key==='Enter')doSearch()"></div>
         <button id="s-btn" onclick="doSearch()"><span id="s-btn-icon">🔍</span><span id="s-btn-label" data-t="searchBtn">Search</span></button>
       </div>
+      <div id="shortcuts-wrapper">
+        <div id="shortcuts-container"></div>
+      </div>
       <div id="suggestions"></div>
       <div id="eng-badge"><span data-t="via">via</span> <span id="eng-name">Google</span></div>
     </div>
@@ -110,6 +125,22 @@
     <input class="minput" type="text" id="m-url" data-t-placeholder="modalUrlPh" placeholder="https://…?q={searchTerms}">
     <input class="minput" type="text" id="m-name" data-t-placeholder="modalNamePh" placeholder="Engine name">
     <div class="mbtns"><button class="mbtn cancel" onclick="closeModal()" data-t="modalCancel">Cancel</button><button class="mbtn ok" onclick="saveCustomEng()" data-t="modalSave">Save</button></div>
+  </div>
+</div>
+<div id="shortcut-modal" class="modal">
+  <div class="modal-inner">
+    <h3 data-t="shortcutModalTitle">🔗 New Shortcut</h3>
+    <input class="minput" type="text" id="sc-url" placeholder="https://..." data-t-placeholder="urlPlaceholder">
+    <input class="minput" type="text" id="sc-name" placeholder="Name (optional)" data-t-placeholder="namePlaceholder">
+    <div class="icon-upload-row">
+      <label for="sc-icon-file" class="mbtn cancel" style="flex:1; text-align:center;" data-t="IconShortcut">📁 Icon (optional)</label>
+      <input type="file" id="sc-icon-file" accept="image/*" style="display:none">
+      <span id="sc-icon-preview"></span>
+    </div>
+    <div class="mbtns">
+      <button class="mbtn cancel" onclick="closeShortcutModal()" data-t="modalCancel">Cancel</button>
+      <button class="mbtn ok" onclick="saveShortcut()" data-t="modalSave">Save</button>
+    </div>
   </div>
 </div>
 <script src="mondai.js"></script>

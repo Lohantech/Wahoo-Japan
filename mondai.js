@@ -22,6 +22,7 @@ const T = {
     modalCancel:'Cancel',modalSave:'Save',
     sugPfx:['Search','How to','What is','News about'],
     dateFn:d=>d.toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'}),
+    shortcutsTitle:'Shortcuts' ,addShortcut:'Add Shortcut' ,shortcutModalTitle:'🔗 New Shortcut' ,IconShortcut:'📁 Icon (optional)' ,modalCancel:'Cancel',modalSave:'Save'
   },
   jp:{
     persoBtn:'パーソナライズ',settingsBtn:'設定',
@@ -43,6 +44,7 @@ const T = {
     modalCancel:'キャンセル',modalSave:'保存',
     sugPfx:['を調べる','とは何ですか','の使い方','最新情報'],
     dateFn:d=>`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${['日','月','火','水','木','金','土'][d.getDay()]}）`,
+    shortcutsTitle:'ショートカット' ,addShortcut:'ショートカットを追加' ,shortcutModalTitle:'🔗 新しいショートカット' ,IconShortcut:'📁 アイコン（任意）' ,modalCancel:'キャンセル',modalSave:'保存',
   }
 };
 
@@ -126,6 +128,7 @@ let st={
   customSlots:[null,null,null,null,null],
   mode:'light',
   overlay:true,
+  shortcuts:[],
 };
 let _pendingSlot=-1;
 
@@ -170,7 +173,8 @@ function closeAll(){
   document.querySelectorAll('.dropdown').forEach(d=>d.classList.remove('open'));
 }
 document.addEventListener('click',e=>{
-  if(!e.target.closest('.panel-wrap')&&!e.target.closest('#modal-inner'))closeAll();
+  if(!document.contains(e.target)) return;
+  if(!e.target.closest('.panel-wrap')&&!e.target.closest('#modal-inner')&&!e.target.closest('#shortcut-modal'))closeAll();
 });
 
 /* ═══════════════════════════════════════════════════
@@ -407,6 +411,7 @@ function exportSave(){
     customSlots:st.customSlots,
     mode:st.mode,
     overlay:st.overlay,
+    shortcuts:st.shortcuts||[],
   };
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
   const a=document.createElement('a');
@@ -490,7 +495,126 @@ function applyState(d){
   applyMode();
   applyLang();
   renderCustomSlots();
+  if(Array.isArray(d.shortcuts)){
+    st.shortcuts=d.shortcuts;
+    saveShortcuts();
+  }
+  renderShortcuts();
   save();
+}
+
+/* ═══════════════════════════════════════════════════
+   SHORTCUTS
+═══════════════════════════════════════════════════ */
+let _scIconData=null;
+
+function openShortcutModal(){
+  _scIconData=null;
+  document.getElementById('sc-url').value='';
+  document.getElementById('sc-name').value='';
+  document.getElementById('sc-icon-preview').innerHTML='';
+  document.getElementById('sc-icon-file').value='';
+  document.getElementById('shortcut-modal').classList.add('show');
+}
+
+function closeShortcutModal(){
+  document.getElementById('shortcut-modal').classList.remove('show');
+}
+
+document.getElementById('sc-icon-file').addEventListener('change',function(e){
+  const f=e.target.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    _scIconData=ev.target.result;
+    document.getElementById('sc-icon-preview').innerHTML=
+      `<img src="${_scIconData}" class="sc-preview-img">`;
+  };
+  r.readAsDataURL(f);
+});
+
+function _scDomainName(url){
+  try{
+    const h=new URL(url).hostname.replace(/^www\./,'');
+    const name=h.split('.')[0];
+    return name.charAt(0).toUpperCase()+name.slice(1);
+  }catch(e){return 'Site';}
+}
+
+function _scFaviconUrl(url){
+  try{
+    const domain=new URL(url).hostname;
+    return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+  }catch(e){return null;}
+}
+
+function saveShortcut(){
+  let url=document.getElementById('sc-url').value.trim();
+  if(!url){alert('URL is required.');return;}
+  if(!/^https?:\/\//i.test(url)) url='https://'+url;
+  const name=document.getElementById('sc-name').value.trim()||_scDomainName(url);
+  const sc={
+    id:Date.now(),
+    url:url,
+    name:name,
+    icon:_scIconData||_scFaviconUrl(url),
+    iconType:_scIconData?'custom':'favicon',
+  };
+  if(!st.shortcuts) st.shortcuts=[];
+  st.shortcuts.push(sc);
+  closeShortcutModal();
+  renderShortcuts();
+  saveShortcuts();
+}
+
+function deleteShortcut(id){
+  st.shortcuts=(st.shortcuts||[]).filter(s=>s.id!==id);
+  renderShortcuts();
+  saveShortcuts();
+}
+
+function _scIconHtml(sc,size){
+  size=size||32;
+  const letter=sc.name.charAt(0).toUpperCase();
+  if(!sc.icon) return `<span class="sc-letter">${letter}</span>`;
+  if(sc.iconType==='custom'){
+    return `<img src="${sc.icon}" class="sc-img" style="width:${size}px;height:${size}px">`;
+  }
+  return `<img src="${sc.icon}" class="sc-img" style="width:${size}px;height:${size}px"
+    onerror="this.outerHTML='<span class=\\'sc-letter\\'>${letter}</span>'">`;
+}
+
+function renderShortcuts(){
+  const cont=document.getElementById('shortcuts-container');
+  if(cont){
+    cont.innerHTML=(st.shortcuts||[]).map(sc=>
+      `<a class="sc-item" href="${sc.url}" target="_blank" title="${sc.name}">
+        <div class="sc-icon-wrap">${_scIconHtml(sc,28)}</div>
+        <div class="sc-lbl">${sc.name}</div>
+      </a>`
+    ).join('');
+  }
+  const list=document.getElementById('shortcuts-list');
+  if(list){
+    if(!st.shortcuts||!st.shortcuts.length){list.innerHTML='';return;}
+    list.innerHTML=(st.shortcuts||[]).map(sc=>
+      `<div class="sc-row">
+        <div class="sc-row-ic">${_scIconHtml(sc,18)}</div>
+        <div class="sc-row-name">${sc.name}</div>
+        <button class="sc-row-del" onclick="deleteShortcut(${sc.id})">✕</button>
+      </div>`
+    ).join('');
+  }
+}
+
+function saveShortcuts(){
+  try{localStorage.setItem('_sp_shortcuts',JSON.stringify(st.shortcuts));}catch(e){}
+}
+
+function loadShortcuts(){
+  try{
+    const d=localStorage.getItem('_sp_shortcuts');
+    if(d) st.shortcuts=JSON.parse(d);
+  }catch(e){}
 }
 
 /* ═══════════════════════════════════════════════════
@@ -498,12 +622,14 @@ function applyState(d){
 ═══════════════════════════════════════════════════ */
 function init(){
   loadSlots();
+  loadShortcuts();
   try{
     const d=JSON.parse(localStorage.getItem('_sp')||'{}');
     applyState(d);
   }catch(e){
     applyState({});
   }
+  renderShortcuts();
   spawnParticles(st.season);
   updateClock();
 }

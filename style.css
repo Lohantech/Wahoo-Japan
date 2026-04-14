@@ -1111,3 +1111,241 @@ body:not(.mode-light) #tz-cur-label{color:var(--t3)!important;}
     #header{padding:8px 12px;}
     .hbtn{width:34px;height:34px;font-size:15px;}
 }
+
+#shortcuts-wrapper{
+  width:100%;
+  max-width:640px;
+  margin-bottom:2px;
+}
+
+#shortcuts-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:4px 2px 0;
+  min-height:0;
+}
+
+.sc-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  padding:7px 9px 6px;
+  border-radius:var(--r1);
+  background:rgba(255,255,255,.55);
+  border:1px solid var(--bd);
+  text-decoration:none;
+  color:var(--t2);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.2px;
+  min-width:52px;
+  max-width:72px;
+  transition:background .15s,transform .13s,box-shadow .15s,color .13s;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+
+.sc-item:hover{
+  background:rgba(255,255,255,.88);
+  box-shadow:var(--s1);
+  transform:translateY(-2px);
+  color:var(--o);
+}
+
+.sc-icon-wrap{
+  width:28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.sc-img{
+  object-fit:contain;
+  border-radius:5px;
+  display:block;
+}
+
+.sc-letter{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:28px;
+  height:28px;
+  border-radius:6px;
+  background:var(--o);
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  flex-shrink:0;
+}
+
+.sc-lbl{
+  max-width:64px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  text-align:center;
+  line-height:1.2;
+}
+
+/* ─── Volet : liste des raccourcis ─── */
+#shortcuts-list{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding:0 11px;
+}
+
+.sc-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 8px;
+  border-radius:var(--r0);
+  background:var(--panel2);
+  border:1px solid var(--bd3);
+}
+
+.sc-row-ic{
+  width:20px;
+  height:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.sc-row-ic .sc-letter{
+  width:18px;
+  height:18px;
+  font-size:9px;
+  border-radius:4px;
+}
+
+.sc-row-ic .sc-img{
+  width:18px!important;
+  height:18px!important;
+  border-radius:3px;
+}
+
+.sc-row-name{
+  flex:1;
+  font-size:12px;
+  color:var(--t1);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.sc-row-del{
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:var(--t3);
+  font-size:11px;
+  padding:3px 5px;
+  border-radius:3px;
+  transition:color .12s,background .12s;
+  line-height:1;
+}
+
+.sc-row-del:hover{
+  color:#e74c3c;
+  background:rgba(231,76,60,.10);
+}
+
+.dropdown > .dtitle{
+  margin:8px 11px 4px;
+}
+
+#add-shortcut-btn{
+  margin:4px 11px 8px;
+  width:calc(100% - 22px);
+  justify-content: center;
+}
+
+/* ─── Modal raccourci ─── */
+#shortcut-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.45);
+}
+
+#shortcut-modal.show{
+  display:flex;
+}
+
+#shortcut-modal .modal-inner{
+  width:90%;
+  max-width:400px;
+  padding:22px;
+  gap:11px;
+  display:flex;
+  flex-direction:column;
+  background:var(--panel);
+  border:1px solid var(--bd2);
+  border-top:3px solid var(--o);
+  border-radius:var(--r2);
+  box-shadow:var(--s3),0 0 28px var(--og);
+}
+
+#shortcut-modal h3{
+  color:var(--t1);
+  font-size:16px;
+  font-weight:800;
+}
+
+.icon-upload-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.sc-preview-img{
+  width:28px;
+  height:28px;
+  border-radius:5px;
+  object-fit:cover;
+  border:1px solid var(--bd2);
+  flex-shrink:0;
+}
+
+/* ─── Dark mode ─── */
+body:not(.mode-light) .sc-item{
+  background:rgba(255,255,255,.06);
+  border-color:var(--bd);
+  color:var(--t2);
+}
+
+body:not(.mode-light) .sc-item:hover{
+  background:rgba(255,255,255,.13);
+  color:var(--o3);
+}
+
+body:not(.mode-light) #shortcut-modal .modal-inner{
+  background:var(--panel);
+}
+
+body:not(.mode-light) .sc-row{
+  background:var(--panel2);
+  border-color:var(--bd3);
+}
+
+/* ─── Mobile ─── */
+@media(max-width:520px){
+  #shortcuts-container{gap:6px;}
+  .sc-item{min-width:46px;max-width:60px;padding:6px 6px 5px;}
+  .sc-icon-wrap{width:24px;height:24px;}
+  .sc-letter{width:24px;height:24px;font-size:11px;}
+}
