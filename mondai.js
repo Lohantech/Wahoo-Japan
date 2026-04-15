@@ -261,7 +261,7 @@ function buildURL(q){
   if(!e) return 'https://www.google.com/search?q='+encodeURIComponent(q);
   return e.url.replace('{q}',encodeURIComponent(q)).replace(/{l}/g,l);
 }
-function doSearch(){const q=document.getElementById('s-input').value.trim();if(q)window.open(buildURL(q),'_blank');}
+function doSearch(){const q=document.getElementById('s-input').value.trim();if(q)window.location.href=buildURL(q);}
 let sugT;
 function handleInput(){
   clearTimeout(sugT);
