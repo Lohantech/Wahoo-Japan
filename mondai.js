@@ -269,15 +269,6 @@ function handleInput(){
   if(!q){hideSug();return;}
   sugT=setTimeout(()=>showSug(q),200);
 }
-function showSug(q){
-  const jp=st.lang==='jp', pfx=T[st.lang].sugPfx;
-  const html=pfx.slice(0,4).map(p=>{const t=jp?q+p:p+' '+q;return`<div class="sug" onclick="pickSug('${t.replace(/'/g,"\\'")}')"><span class="sug-ic">🔍</span>${t}</div>`;}).join('');
-  const box=document.getElementById('suggestions');
-  box.innerHTML=html; box.classList.add('show');
-}
-function hideSug(){document.getElementById('suggestions').classList.remove('show');}
-function pickSug(t){document.getElementById('s-input').value=t;hideSug();doSearch();}
-document.addEventListener('click',e=>{if(!e.target.closest('#search-box')&&!e.target.closest('#suggestions'))hideSug();});
 
 /* ═══════════════════════════════════════════════════
    SEASON
@@ -289,13 +280,18 @@ const SP={
   automne:['🍂','🍁','🍂','🍁','🍃'],
   hiver:['❄️','🛷','☃️','❄️','⛄'],
 };
-function setSeason(name,el){
-  document.querySelectorAll('.spill').forEach(p=>p.classList.remove('sel'));
-  if(el) el.classList.add('sel');
-  document.body.className=document.body.className.replace(/season-\S+/g,'').trim()+' season-'+name;
-  if(st.wallpaper!=='none') document.body.classList.add('has-wallpaper');
-  if(st.mode==='light') document.body.classList.add('mode-light');
+
+function setSeason(name, el) {
+  document.querySelectorAll('.spill').forEach(p => p.classList.remove('sel'));
+  if (el) el.classList.add('sel');
+  st.season = name;                          
+  document.body.className = document.body.className.replace(/season-\S+/g, '').trim() + ' season-' + name;
+  if (st.wallpaper !== 'none') document.body.classList.add('has-wallpaper');
+  if (st.mode === 'light') document.body.classList.add('mode-light');
+  spawnParticles(name);                      
+  save();                                   
 }
+
 function spawnParticles(s){
   const c=document.getElementById('particles'); c.innerHTML='';
   const em=SP[s]; if(!em.length) return;

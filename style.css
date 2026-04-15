@@ -876,22 +876,6 @@ body.season-hiver #clock {
   line-height: 1;
 }
 
-#suggestions {
-  width: 100%;
-  max-width: 640px;
-  overflow: hidden;
-  display: none;
-  border-radius: var(--r1);
-  background: var(--panel);
-  border: 1px solid var(--bd2);
-  border-top: 2px solid var(--o);
-  box-shadow: var(--s2);
-}
-
-#suggestions.show {
-  display: block;
-}
-
 .sug {
   padding: 9px 16px;
   color: var(--t1);
@@ -1080,7 +1064,6 @@ body:not(.mode-light) .hbtn{background:var(--panel2);}
 body:not(.mode-light) .hbtn:hover{background:var(--o);color:#fff;}
 body:not(.mode-light) #search-box{background:var(--panel);}
 body:not(.mode-light) #s-input{color:var(--t1);}
-body:not(.mode-light) #suggestions{background:var(--panel);}
 body:not(.mode-light) #footer{background:var(--panel);}
 body:not(.mode-light) #modal-inner{background:var(--panel);}
 body:not(.mode-light) .minput{background:var(--panel2);}
@@ -1116,10 +1099,12 @@ body:not(.mode-light) #tz-cur-label{color:var(--t3)!important;}
   width:100%;
   max-width:640px;
   margin-bottom:2px;
+  margin: 0 auto;
 }
 
 #shortcuts-container{
   display:flex;
+  justify-content: center;
   flex-wrap:wrap;
   gap:8px;
   padding:4px 2px 0;
