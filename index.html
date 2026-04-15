@@ -31,8 +31,7 @@
         <div class="dropdown" id="perso-panel">
 
           <div class="dropdown-inner">
-            
-          <div class="sep"></div>
+
           <div class="dtitle" data-t="shortcutsTitle">Shortcuts</div>
           <div id="shortcuts-list"></div>
           <button class="action-row" id="add-shortcut-btn" onclick="openShortcutModal()">
@@ -40,6 +39,7 @@
             <span data-t="addShortcut">Add a Shortcuts</span>
           </button>
 
+          <div class="sep"></div>
             <div class="dtitle" data-t="seasonTitle">Season Theme</div>
             <div id="season-grid">
               <div class="spill sel" data-s="default" onclick="setSeason('default',this)" data-t-inner="tDefault">Default</div>
@@ -48,6 +48,7 @@
               <div class="spill" data-s="automne" onclick="setSeason('automne',this)" data-t-inner="tAutumn">🍂 Autumn</div>
               <div class="spill" data-s="hiver" onclick="setSeason('hiver',this)" data-t-inner="tWinter">❄️ Winter</div>
             </div>
+
             <div class="sep"></div>
             <div class="dtitle" data-t="wpTitle">Wallpaper</div>
             <div id="wp-grid">
@@ -58,6 +59,8 @@
               <div class="wp-t" data-wp="picture/05.jpg" onclick="setWP('picture/05.jpg',this)"><img src="picture/05.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="wp-lbl">T4</div></div>
               <div class="wp-t" data-wp="picture/06.jpeg" onclick="setWP('picture/06.jpeg',this)"><img src="picture/06.jpeg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="wp-lbl">T5</div></div>
             </div>
+
+            <div class="sep"></div>
             <div class="dtitle" data-t="myPhotosTitle" style="margin-top:4px">My Photos (5 slots)</div>
             <div id="custom-slots-grid"></div>
             <input type="file" id="slot-file" accept="image/*" style="display:none" onchange="onSlotFile(event)">
