@@ -717,7 +717,7 @@ code.pill {
 @media (max-width:840px) {
   #nav-bar { padding:8px 14px; gap:10px; }
   #clock   { font-size:48px; letter-spacing:4px; }
-  #center-card { padding:10px 10px; }
+  #center-card { padding:10px 10px; min-width: 200px;}
 }
 
 /* ═══════════════════════════════════════
@@ -745,7 +745,7 @@ code.pill {
 
   /* Carte centrale */
   #clock       { font-size:40px; letter-spacing:3px; }
-  #center-card { padding:10px 10px; max-width:100%; }
+  #center-card { padding:2px 2px; max-width:100%; min-width: 200px; }
 
   /* Bouton recherche sans label */
   #s-btn-label { display:none; }
