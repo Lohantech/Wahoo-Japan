@@ -423,18 +423,25 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
 }
 
 #logo-beta {
-  color:#9b59b6; font-size:.8rem; font-weight:700; letter-spacing:.5px;
+  color:#9b59b6; 
+  font-size:.8rem; 
+  font-weight:700; 
+  letter-spacing:.5px;
 }
 
-/* Search area (center) */
 #nav-search-wrap {
   flex:1;
-  display:flex; flex-direction:column; align-items:center; gap:4px;
+  display:flex; 
+  flex-direction:column; 
+  align-items:center; 
+  gap:4px;
   min-width:0;
 }
 
 #search-anchor {
-  position:relative; width:100%; max-width:560px;
+  position:relative; 
+  width:100%; 
+  max-width:560px;
 }
 
 #search-row {
@@ -451,14 +458,16 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
   transition:border-color .2s, box-shadow .2s;
 }
 #search-box:focus-within {
-  border-color:var(--o);
-  box-shadow:0 0 0 3px var(--og), var(--s1);
+  box-shadow:0 0 0 2px rgba(0,0,0,.08), var(--s1);
 }
 
 #s-input {
-  width:100%; background:none; border:none; outline:none;
-  font-size:15px; color:var(--t1); font-family:inherit;
-  caret-color:var(--o);
+  width:100%; 
+  background:none; 
+  border:none; 
+  outline:none;
+  font-size:15px; 
+  color:var(--t1); 
 }
 #s-input::placeholder { color:var(--t5); }
 
@@ -708,7 +717,7 @@ code.pill {
 @media (max-width:840px) {
   #nav-bar { padding:8px 14px; gap:10px; }
   #clock   { font-size:48px; letter-spacing:4px; }
-  #center-card { padding:12px 12px; }
+  #center-card { padding:10px 10px; }
 }
 
 /* ═══════════════════════════════════════
@@ -736,7 +745,7 @@ code.pill {
 
   /* Carte centrale */
   #clock       { font-size:40px; letter-spacing:3px; }
-  #center-card { padding:24px 20px; max-width:100%; }
+  #center-card { padding:10px 10px; max-width:100%; }
 
   /* Bouton recherche sans label */
   #s-btn-label { display:none; }
