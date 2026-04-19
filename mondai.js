@@ -23,7 +23,6 @@ const T = {
     modalExample:'e.g. https://search.example.com/?q={searchTerms}',
     modalUrlPh:'https://…?q={searchTerms}', modalNamePh:'Engine name (e.g. Qwant)',
     modalCancel:'Cancel', modalSave:'Save',
-    sugPfx:['How to', 'What is', 'News about'],
     dateFn: d => d.toLocaleDateString('en-GB', { weekday:'long', year:'numeric', month:'long', day:'numeric' }),
     shortcutsTitle:'Shortcuts', addShortcut:'Add a Shortcut',
     shortcutModalTitle:'🔗 New Shortcut', IconShortcut:'📁 Icon (optional)',
@@ -48,7 +47,6 @@ const T = {
     modalExample:'例: https://search.example.com/?q={searchTerms}',
     modalUrlPh:'https://…?q={searchTerms}', modalNamePh:'エンジン名（例：Qwant）',
     modalCancel:'キャンセル', modalSave:'保存',
-    sugPfx:['とは', 'の使い方', 'の最新情報'],
     dateFn: d => `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${['日','月','火','水','木','金','土'][d.getDay()]}）`,
     shortcutsTitle:'ショートカット', addShortcut:'ショートカットを追加',
     shortcutModalTitle:'🔗 新しいショートカット', IconShortcut:'📁 アイコン（任意）',
@@ -188,7 +186,6 @@ document.addEventListener('click', e => {
   if (!e.target.closest('.panel-wrap') &&
       !e.target.closest('#modal-inner') &&
       !e.target.closest('#shortcut-modal')) closeAll();
-  if (!e.target.closest('#search-anchor')) hideSug();
 });
 
 /* ═══════════════════════════════════════════════════
@@ -298,7 +295,7 @@ function saveCustomEng() {
 }
 
 /* ═══════════════════════════════════════════════════
-   RECHERCHE + SUGGESTIONS
+   SEARCH
 ═══════════════════════════════════════════════════ */
 function buildURL(q) {
   const l = st.lang === 'jp' ? 'ja' : 'en';
@@ -319,26 +316,6 @@ function handleInput() {
   const q = document.getElementById('s-input').value.trim();
   if (!q) { hideSug(); return; }
   _sugTimer = setTimeout(() => showSug(q), 220);
-}
-
-function showSug(q) {
-  const box = document.getElementById('sug-box');
-  if (!box) return;
-  const L = T[st.lang];
-  const pfx = L.sugPfx || [];
-  const items = [q, ...pfx.map(p => st.lang === 'jp' ? q + p : p + ' ' + q)].slice(0, 4);
-  box.innerHTML = items.map(t => {
-    const safe = t.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    return `<div class="sug" onclick="document.getElementById('s-input').value='${safe}';doSearch();">
-      <span class="sug-ic">🔍</span><span>${t}</span>
-    </div>`;
-  }).join('');
-  box.classList.add('show');
-}
-
-function hideSug() {
-  const box = document.getElementById('sug-box');
-  if (box) box.classList.remove('show');
 }
 
 /* ═══════════════════════════════════════════════════

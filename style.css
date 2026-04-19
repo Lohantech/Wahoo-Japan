@@ -481,26 +481,6 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
 }
 #eng-badge span { color:var(--t1); font-weight:700; }
 
-/* Suggestions */
-#sug-box {
-  position:absolute; top:calc(100% + 2px); left:0; right:0;
-  z-index:300; background:var(--panel);
-  border:1px solid var(--bd2); border-top:none;
-  border-radius:0 0 var(--r) var(--r);
-  box-shadow:var(--s2);
-  display:none; overflow:hidden;
-}
-#sug-box.show { display:block; }
-
-.sug {
-  padding:9px 14px; color:var(--t1); font-size:13px;
-  cursor:pointer; display:flex; align-items:center; gap:9px;
-  border-bottom:1px solid var(--bd3); transition:background .11s;
-}
-.sug:last-child { border-bottom:none; }
-.sug:hover      { background:var(--panel2); }
-.sug-ic         { font-size:11px; color:var(--t3); }
-
 /* Date + heure (droite) */
 #nav-datetime {
   flex-shrink:0; text-align:right;

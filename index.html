@@ -140,14 +140,13 @@
         <div id="search-row">
           <div id="search-box">
             <input type="text" id="s-input" placeholder="Search…" autocomplete="off"
-              oninput="handleInput()" onkeydown="if(event.key==='Enter')doSearch();if(event.key==='Escape')hideSug()">
+              oninput="handleInput()" onkeydown="if(event.key==='Enter')doSearch();">
           </div>
           <button id="s-btn" onclick="doSearch()">
             <img src="aero_touch/search.png" alt="Search" id="s-btn-icon";>
             <span id="s-btn-label" data-t="searchBtn">Search</span>
           </button>
         </div>
-        <div id="sug-box"></div>
       </div>
       <div id="eng-badge"><span data-t="via">via</span> <span id="eng-name">Google</span></div>
     </div>
