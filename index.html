@@ -28,99 +28,14 @@
     </div>
 
     <div id="tb-right">
-      <div class="panel-wrap">
-        <button class="hbtn" id="perso-btn" onclick="togglePanel('perso')" title="Personalise">
-          <img src="aero_touch/art.png" alt="Personalise" style="width:20px;height:20px">
-          <span data-t="persoBtn">Personalise</span> 
-        </button>
-        <div class="dropdown" id="perso-panel">
-          <div class="dropdown-inner">
-            <div class="dtitle" data-t="shortcutsTitle">Shortcuts</div>
-            <div id="shortcuts-list"></div>
-            <button class="action-row" id="add-shortcut-btn" onclick="openShortcutModal()">
-              <span class="ar-icon">➕</span>
-              <span data-t="addShortcut">Add a Shortcut</span>
-            </button>
-            <div class="sep"></div>
-            <div class="dtitle" data-t="seasonTitle">Season Theme</div>
-            <div id="season-grid">
-              <div class="spill sel" data-s="default" onclick="setSeason('default',this)" data-t-inner="tDefault">Default</div>
-              <div class="spill" data-s="printemps" onclick="setSeason('printemps',this)" data-t-inner="tSpring">🌸 Spring</div>
-              <div class="spill" data-s="ete" onclick="setSeason('ete',this)" data-t-inner="tSummer">☀️ Summer</div>
-              <div class="spill" data-s="automne" onclick="setSeason('automne',this)" data-t-inner="tAutumn">🍂 Autumn</div>
-              <div class="spill" data-s="hiver" onclick="setSeason('hiver',this)" data-t-inner="tWinter">❄️ Winter</div>
-            </div>
-            <div class="sep"></div>
-            <div class="dtitle" data-t="wpTitle">Wallpaper</div>
-            <div id="wp-grid">
-              <div class="wp-t sel" data-wp="none" onclick="setWP('none',this)">
-                <div class="wp-def" style="background:linear-gradient(135deg,#fff8f0,#ffe0c0)">🌸</div>
-                <div class="wp-lbl" data-t="wpDefault">Default</div>
-              </div>
-              <div class="wp-t" data-wp="picture/02.png" onclick="setWP('picture/02.png',this)">
-                <img src="picture/02.png" alt="T1"><div class="wp-lbl">T1</div>
-              </div>
-              <div class="wp-t" data-wp="picture/03.jpeg" onclick="setWP('picture/03.jpeg',this)">
-                <img src="picture/03.jpeg" alt="T2"><div class="wp-lbl">T2</div>
-              </div>
-              <div class="wp-t" data-wp="picture/04.jpg" onclick="setWP('picture/04.jpg',this)">
-                <img src="picture/04.jpg" alt="T3"><div class="wp-lbl">T3</div>
-              </div>
-              <div class="wp-t" data-wp="picture/05.jpg" onclick="setWP('picture/05.jpg',this)">
-                <img src="picture/05.jpg" alt="T4"><div class="wp-lbl">T4</div>
-              </div>
-              <div class="wp-t" data-wp="picture/06.jpeg" onclick="setWP('picture/06.jpeg',this)">
-                <img src="picture/06.jpeg" alt="T5"><div class="wp-lbl">T5</div>
-              </div>
-            </div>
-            <div class="sep"></div>
-            <div class="dtitle" data-t="myPhotosTitle">My Photos (5 slots)</div>
-            <div id="custom-slots-grid"></div>
-            <input type="file" id="slot-file" accept="image/*" style="display:none" onchange="onSlotFile(event)">
-          </div>
-        </div>
-      </div>
-
-      <div class="panel-wrap">
-        <button class="hbtn" id="param-btn" onclick="togglePanel('param')" title="Settings">
-          <img src="aero_touch/re.png" alt="Settings" style="width:20px;height:20px">
-          <span data-t="settingsBtn">Settings</span> 
-        </button>
-        <div class="dropdown" id="param-panel">
-          <div class="dropdown-inner">
-            <div class="dtitle" data-t="engineTitle">Search Engine</div>
-            <div class="opt sel" data-eng="google" onclick="setEng(this)"><span class="dot"></span>Google</div>
-            <div class="opt" data-eng="yahoojp" onclick="setEng(this)"><span class="dot"></span>Yahoo! Japan</div>
-            <div class="opt" data-eng="bing" onclick="setEng(this)"><span class="dot"></span>Bing</div>
-            <div class="opt" data-eng="yahoo" onclick="setEng(this)"><span class="dot"></span>Yahoo! (USA)</div>
-            <div class="opt" data-eng="duckduckgo" onclick="setEng(this)"><span class="dot"></span>DuckDuckGo</div>
-            <div class="opt" data-eng="ecosia" onclick="setEng(this)"><span class="dot"></span>Ecosia</div>
-            <div class="opt" data-eng="custom" onclick="openModal()"><span class="dot"></span><em style="opacity:.65" data-t="eCustom">Other engine…</em></div>
-            <div class="sep"></div>
-            <div class="dtitle" data-t="langTitle">Language</div>
-            <div class="opt sel" data-lang="en" onclick="setLang('en',this)"><span class="dot"></span>🇬🇧 English</div>
-            <div class="opt" data-lang="jp" onclick="setLang('jp',this)"><span class="dot"></span>🇯🇵 日本語</div>
-            <div class="sep"></div>
-            <div class="dtitle" data-t="tzTitle">Timezone</div>
-            <input type="text" id="tz-search" placeholder="Search timezone…" autocomplete="off"
-              oninput="filterTZ(this.value)" onfocus="filterTZ(this.value)">
-            <div id="tz-list"></div>
-            <div id="tz-info">
-              <span id="tz-cur-label"></span>
-              <span id="tz-reset-btn" onclick="resetTZ()">Auto</span>
-            </div>
-            <div class="sep"></div>
-            <div class="dtitle" data-t="backupTitle">Backup</div>
-            <div class="action-row" onclick="exportSave()">
-              <span class="ar-icon">📤</span><span data-t="exportBtn">Export settings</span>
-            </div>
-            <div class="action-row" onclick="document.getElementById('import-file').click()">
-              <span class="ar-icon">📥</span><span data-t="importBtn">Import settings</span>
-            </div>
-            <input type="file" id="import-file" accept=".json" style="display:none" onchange="importSave(event)">
-          </div>
-        </div>
-      </div>
+      <button class="hbtn" onclick="openDrawer('perso')" title="Personnaliser">
+        <img src="aero_touch/art.png" alt="Personnalise" style="width:20px;height:20px">
+        <span data-t="persoBtn">Personalise</span>
+      </button>
+      <button class="hbtn" onclick="openDrawer('param')" title="Settings">
+        <img src="aero_touch/re.png" alt="Settings" style="width:20px;height:20px">
+        <span data-t="settingsBtn">Settings</span>
+      </button>
     </div>
     <a href="https://help.japan-vi.be" id="f-right" data-t="footerRight">❓Help</a>
     </div>
@@ -177,7 +92,6 @@
     <span></span>
     <a href="https://help.japan-vi.be" id="f-right" data-t="footerRight">❓Help</a>
   </footer>
-
 </div>
 
 <div id="modal">
@@ -208,6 +122,107 @@
       <button class="mbtn cancel" onclick="closeShortcutModal()" data-t="modalCancel">Cancel</button>
       <button class="mbtn ok" onclick="saveShortcut()" data-t="modalSave">Save</button>
     </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     DRAWER COULISSANT
+═══════════════════════════════════════ -->
+<div id="drawer-overlay" onclick="closeDrawer()"></div>
+<div id="drawer">
+  <div id="drawer-head">
+    <div id="drawer-tabs">
+      <button class="drw-tab active" data-tab="perso" onclick="switchDrawerTab('perso')">
+        <img src="aero_touch/art.png" alt="Personnalise" style="width:20px;height:20px;">
+        <span data-t="persoBtn">Personalise</span></button>
+      <button class="drw-tab" data-tab="param" onclick="switchDrawerTab('param')">
+        <img src="aero_touch/re.png" alt="Personnaliser" style="width:20px;height:20px"> 
+        <span data-t="settingsBtn">Settings</span></button>
+    </div>
+    <button id="drawer-close-btn" onclick="closeDrawer()" title="Fermer">✕</button>
+  </div>
+  <div id="drawer-body">
+
+    <!-- ── PERSONALISE Onglet ── -->
+    <div id="drw-perso" class="drw-section">
+      <div class="dtitle" data-t="shortcutsTitle">Shortcuts</div>
+      <div id="shortcuts-list"></div>
+      <button class="action-row" id="add-shortcut-btn" onclick="openShortcutModal()">
+        <span class="ar-icon">➕</span>
+        <span data-t="addShortcut">Add a Shortcut</span>
+      </button>
+      <div class="sep"></div>
+      <div class="dtitle" data-t="seasonTitle">Season Theme</div>
+      <div id="season-grid">
+        <div class="spill sel" data-s="default" onclick="setSeason('default',this)" data-t-inner="tDefault">Default</div>
+        <div class="spill" data-s="printemps" onclick="setSeason('printemps',this)" data-t-inner="tSpring">🌸 Spring</div>
+        <div class="spill" data-s="ete" onclick="setSeason('ete',this)" data-t-inner="tSummer">☀️ Summer</div>
+        <div class="spill" data-s="automne" onclick="setSeason('automne',this)" data-t-inner="tAutumn">🍂 Autumn</div>
+        <div class="spill" data-s="hiver" onclick="setSeason('hiver',this)" data-t-inner="tWinter">❄️ Winter</div>
+      </div>
+      <div class="sep"></div>
+      <div class="dtitle" data-t="wpTitle">Wallpaper</div>
+      <div id="wp-grid">
+        <div class="wp-t sel" data-wp="none" onclick="setWP('none',this)">
+          <div class="wp-def" style="background:linear-gradient(135deg,#fff8f0,#ffe0c0)">🌸</div>
+          <div class="wp-lbl" data-t="wpDefault">Default</div>
+        </div>
+        <div class="wp-t" data-wp="picture/02.png" onclick="setWP('picture/02.png',this)">
+          <img src="picture/02.png" alt="T1"><div class="wp-lbl">T1</div>
+        </div>
+        <div class="wp-t" data-wp="picture/03.jpeg" onclick="setWP('picture/03.jpeg',this)">
+          <img src="picture/03.jpeg" alt="T2"><div class="wp-lbl">T2</div>
+        </div>
+        <div class="wp-t" data-wp="picture/04.jpg" onclick="setWP('picture/04.jpg',this)">
+          <img src="picture/04.jpg" alt="T3"><div class="wp-lbl">T3</div>
+        </div>
+        <div class="wp-t" data-wp="picture/05.jpg" onclick="setWP('picture/05.jpg',this)">
+          <img src="picture/05.jpg" alt="T4"><div class="wp-lbl">T4</div>
+        </div>
+        <div class="wp-t" data-wp="picture/06.jpeg" onclick="setWP('picture/06.jpeg',this)">
+          <img src="picture/06.jpeg" alt="T5"><div class="wp-lbl">T5</div>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="dtitle" data-t="myPhotosTitle">My Photos (5 slots)</div>
+      <div id="custom-slots-grid"></div>
+      <input type="file" id="slot-file" accept="image/*" style="display:none" onchange="onSlotFile(event)">
+    </div>
+
+    <!-- ── SETTING Onglet ── -->
+    <div id="drw-param" class="drw-section hidden">
+      <div class="dtitle" data-t="engineTitle">Search Engine</div>
+      <div class="opt sel" data-eng="google" onclick="setEng(this)"><span class="dot"></span>Google</div>
+      <div class="opt" data-eng="yahoojp" onclick="setEng(this)"><span class="dot"></span>Yahoo! JAPAN</div>
+      <div class="opt" data-eng="bing" onclick="setEng(this)"><span class="dot"></span>Bing</div>
+      <div class="opt" data-eng="yahoo" onclick="setEng(this)"><span class="dot"></span>Yahoo! (USA)</div>
+      <div class="opt" data-eng="duckduckgo" onclick="setEng(this)"><span class="dot"></span>DuckDuckGo</div>
+      <div class="opt" data-eng="ecosia" onclick="setEng(this)"><span class="dot"></span>Ecosia</div>
+      <div class="opt" data-eng="custom" onclick="openModal()"><span class="dot"></span><em style="opacity:.65" data-t="eCustom">Other engine…</em></div>
+      <div class="sep"></div>
+      <div class="dtitle" data-t="langTitle">Language</div>
+      <div class="opt sel" data-lang="en" onclick="setLang('en',this)"><span class="dot"></span>🇬🇧 English</div>
+      <div class="opt" data-lang="jp" onclick="setLang('jp',this)"><span class="dot"></span>🇯🇵 日本語</div>
+      <div class="sep"></div>
+      <div class="dtitle" data-t="tzTitle">Timezone</div>
+      <input type="text" id="tz-search" placeholder="Search timezone…" autocomplete="off"
+        oninput="filterTZ(this.value)" onfocus="filterTZ(this.value)">
+      <div id="tz-list"></div>
+      <div id="tz-info">
+        <span id="tz-cur-label"></span>
+        <span id="tz-reset-btn" onclick="resetTZ()">Auto</span>
+      </div>
+      <div class="sep"></div>
+      <div class="dtitle" data-t="backupTitle">Backup</div>
+      <div class="action-row" onclick="exportSave()">
+        <span class="ar-icon">📤</span><span data-t="exportBtn">Export settings</span>
+      </div>
+      <div class="action-row" onclick="document.getElementById('import-file').click()">
+        <span class="ar-icon">📥</span><span data-t="importBtn">Import settings</span>
+      </div>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importSave(event)">
+    </div>
+
   </div>
 </div>
 

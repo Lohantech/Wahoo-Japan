@@ -123,9 +123,9 @@ document.addEventListener('click', e => {
 ═══════════════════════════════════════════════════ */
 const ENGINES = {
   google:     { name:'Google',       url:'https://www.google.com/search?q={q}&hl={l}' },
-  yahoojp:    { name:'Yahoo! Japan', url:'https://search.yahoo.co.jp/search?p={q}' },
+  yahoojp:    { name:'Yahoo! JAPAN', url:'https://search.yahoo.co.jp/search?p={q}' },
   bing:       { name:'Bing',         url:'https://www.bing.com/search?q={q}&setlang={l}' },
-  yahoo:      { name:'Yahoo! (USA)', url:'https://search.yahoo.com/search?p={q}' },
+  yahoo:      { name:'Yahoo!',       url:'https://search.yahoo.com/search?p={q}' },
   duckduckgo: { name:'DuckDuckGo',   url:'https://duckduckgo.com/?q={q}' },
   ecosia:     { name:'Ecosia',       url:'https://www.ecosia.org/search?q={q}' },
 };
@@ -169,24 +169,35 @@ function toggleOverlay() {
 }
 
 /* ═══════════════════════════════════════════════════
-   PANELS
+   DRAWER COULISSANT
 ═══════════════════════════════════════════════════ */
-function togglePanel(n) {
-  if (st.panel === n) { closeAll(); }
-  else { closeAll(); st.panel = n; document.getElementById(n+'-panel').classList.add('open'); }
+let _drawerOpen = false;
+
+function openDrawer(tab) {
+  _drawerOpen = true;
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawer-overlay').classList.add('show');
+  switchDrawerTab(tab || 'perso');
 }
 
-function closeAll() {
-  st.panel = null;
-  document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+function closeDrawer() {
+  _drawerOpen = false;
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawer-overlay').classList.remove('show');
 }
 
-document.addEventListener('click', e => {
-  if (!document.contains(e.target)) return;
-  if (!e.target.closest('.panel-wrap') &&
-      !e.target.closest('#modal-inner') &&
-      !e.target.closest('#shortcut-modal')) closeAll();
-});
+function switchDrawerTab(tab) {
+  document.querySelectorAll('.drw-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.getElementById('drw-perso').classList.toggle('hidden', tab !== 'perso');
+  document.getElementById('drw-param').classList.toggle('hidden', tab !== 'param');
+}
+
+/* Fermer le drawer sur Escape */
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+/* Compatibilité : togglePanel redirige vers le drawer */
+function togglePanel(n) { openDrawer(n); }
+function closeAll() { closeDrawer(); }
 
 /* ═══════════════════════════════════════════════════
    LANGUE
@@ -655,6 +666,17 @@ function init() {
   renderShortcuts();
   spawnParticles(st.season);
   updateClock();
+  /* ── Ajuste le layer wallpaper sous les navbars ── */
+  function setNavHeight() {
+    const tb = document.getElementById('topbar');
+    const nb = document.getElementById('nav-bar');
+    if (tb && nb) {
+      const h = tb.offsetHeight + nb.offsetHeight;
+      document.documentElement.style.setProperty('--nav-total-h', h + 'px');
+    }
+  }
+  setNavHeight();
+  window.addEventListener('resize', setNavHeight);
 }
 
 init();
