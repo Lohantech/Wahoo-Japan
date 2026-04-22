@@ -753,9 +753,7 @@ code.pill {
   #s-input     { font-size:14px; }
 
   /* Footer mono-ligne */
-  #footer { flex-direction:column; gap:4px; text-align:center; }
-  #f-left { display:none; }
-
+  #footer { flex-direction:column; gap:4px; text-align:center; font-size:8px; padding:2px 2px 2px;}
   /* Shortcuts */
   #shortcuts-container { gap:6px; }
   .sc-item { min-width:48px; max-width:62px; padding:7px 6px 6px; }

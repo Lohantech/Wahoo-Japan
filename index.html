@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+
 </head>
 <body class="season-default mode-light">
 
@@ -125,9 +126,6 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     DRAWER COULISSANT
-═══════════════════════════════════════ -->
 <div id="drawer-overlay" onclick="closeDrawer()"></div>
 <div id="drawer">
   <div id="drawer-head">
@@ -143,7 +141,6 @@
   </div>
   <div id="drawer-body">
 
-    <!-- ── PERSONALISE Onglet ── -->
     <div id="drw-perso" class="drw-section">
       <div class="dtitle" data-t="shortcutsTitle">Shortcuts</div>
       <div id="shortcuts-list"></div>
@@ -189,7 +186,6 @@
       <input type="file" id="slot-file" accept="image/*" style="display:none" onchange="onSlotFile(event)">
     </div>
 
-    <!-- ── SETTING Onglet ── -->
     <div id="drw-param" class="drw-section hidden">
       <div class="dtitle" data-t="engineTitle">Search Engine</div>
       <div class="opt sel" data-eng="google" onclick="setEng(this)"><span class="dot"></span>Google</div>
