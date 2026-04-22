@@ -477,8 +477,17 @@ function importSave(e) {
 }
 
 /* ═══════════════════════════════════════════════════
-   PERSIST
+   PERSIST — demande le stockage persistant (évite que
+   Firefox Linux efface le localStorage à la fermeture)
 ═══════════════════════════════════════════════════ */
+function requestPersistentStorage() {
+  if (navigator.storage && navigator.storage.persist) {
+    navigator.storage.persisted().then(already => {
+      if (!already) navigator.storage.persist();
+    }).catch(() => {});
+  }
+}
+
 function save() {
   try {
     localStorage.setItem('_sp', JSON.stringify({
@@ -655,6 +664,7 @@ function loadShortcuts() {
    INIT
 ═══════════════════════════════════════════════════ */
 function init() {
+  requestPersistentStorage();
   loadSlots();
   loadShortcuts();
   try {
