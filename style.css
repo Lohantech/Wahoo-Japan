@@ -810,7 +810,6 @@ code.pill {
   padding: 11px 8px;
   background: none;
   border: none;
-  margin-bottom: -2px;
   cursor: pointer;
   font-family: inherit;
   font-size: 12px;
@@ -824,7 +823,7 @@ code.pill {
   gap: 4px;
 
 }
-.drw-tab:hover { color: var(--o); background: var(--panel3); }
+.drw-tab:hover {color: var(--o); background: var(--panel3);}
 .drw-tab.active { color: var(--o); border-bottom-color: var(--o); background: var(--panel); }
 
 #drawer-close-btn {
