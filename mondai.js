@@ -234,7 +234,7 @@ function applyLang() {
 }
 
 /* ═══════════════════════════════════════════════════
-   HORLOGE — met à jour la carte centrale ET la nav-bar
+   HORLOGE
 ═══════════════════════════════════════════════════ */
 function updateClock() {
   const tz = st.timezone, now = new Date();

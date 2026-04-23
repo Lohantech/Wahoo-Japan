@@ -28,9 +28,9 @@
   --t5: rgba(26,20,16,.40);
 
   /* Shadows */
-  --s1: 0 1px 2px rgba(0,0,0,.12);
-  --s2: 0 4px 20px rgba(0,0,0,.14);
-  --s3: 0 8px 36px rgba(0,0,0,.16);
+  --s1: 0 1px 3px rgba(0,0,0,.08);
+  --s2: 0 1px 6px rgba(0,0,0,.10);
+  --s3: 0 2px 8px rgba(0,0,0,.12);
 
   /* Radius */
   --r: 2px;
@@ -210,7 +210,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
   pointer-events:none;
   background:var(--panel);
   border:1px solid var(--bd2);
-  border-top:3px solid var(--o);
+  border-top:1px solid var(--o);
   border-radius:var(--r) var(--r) var(--r) var(--r);
   box-shadow:var(--s3);
 }
@@ -525,18 +525,19 @@ body.season-hiver     #nav-time { color:#3b8cff; }
 
 /* ── Centre card ── */
 #center-card {
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,.7);
-  box-shadow:0 8px 40px rgba(0,0,0,.11), 0 0 0 1px rgba(0,0,0,.04);
-  padding:10px 10px;
-  display:flex; 
-  flex-direction:column;
-  align-items:center; 
-  animation:fadeInUp .6s ease both;
-  min-width:280px; max-width:480px;
-  text-align:center;
+	background: rgba(255,255,255,.88);
+	backdrop-filter: blur(18px);
+	-webkit-backdrop-filter: blur(18px);
+	border: 1px solid rgba(255,255,255,.7);
+	box-shadow: 0 8px 40px rgba(0,0,0,.11), 0 0 0 1px rgba(0,0,0,.04);
+	padding: 10px 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	animation: fadeInUp .6s ease both;
+	min-width: 280px;
+	max-width: 480px;
+	text-align: center;
 }
 
 #clock-wrap {
@@ -567,7 +568,6 @@ body.season-hiver     #clock { color:#3b8cff; text-shadow:0 2px 14px rgba(147,19
 #greeting {
   font-size:13px; font-weight:700; color:var(--o);
   letter-spacing:2.5px; text-transform:uppercase;
-  margin-top:4px;
 }
 
 /* ═══════════════════════════════════════
@@ -650,7 +650,7 @@ body.season-hiver     #clock { color:#3b8cff; text-shadow:0 2px 14px rgba(147,19
 #footer {
   display:flex; justify-content:space-between; align-items:center;
   padding:7px 22px 10px; font-size:10px; color:var(--t5);
-  background:var(--panel); border-top:2px solid var(--o);
+  background:var(--panel); border-top:1px solid var(--o);
   position:relative; z-index:11; flex-shrink:0; letter-spacing:.4px;
 }
 #footer a { color:var(--t5); text-decoration:none; transition:color .15s; }
@@ -670,7 +670,7 @@ body.season-hiver     #clock { color:#3b8cff; text-shadow:0 2px 14px rgba(147,19
   width:90%; max-width:430px; padding:22px; gap:11px;
   display:flex; flex-direction:column;
   background:var(--panel); border:1px solid var(--bd2);
-  border-top:3px solid var(--o); border-radius:var(--r);
+  border-top:1px solid var(--o); border-radius:var(--r);
   box-shadow:var(--s3), 0 0 28px var(--og);
 }
 
@@ -810,7 +810,6 @@ code.pill {
   padding: 11px 8px;
   background: none;
   border: none;
-  border-bottom: 3px solid transparent;
   margin-bottom: -2px;
   cursor: pointer;
   font-family: inherit;
