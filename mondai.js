@@ -114,7 +114,7 @@ function updateTZLabel() {
 }
 
 document.addEventListener('click', e => {
-  if (!e.target.closest('#param-panel'))
+  if (!e.target.closest('#tz-list') && !e.target.closest('#tz-search'))
     document.getElementById('tz-list').classList.remove('show');
 });
 
@@ -322,6 +322,10 @@ function doSearch() {
 
 let _sugTimer;
 
+/* showSug / hideSug — stubs (autocomplete non implémenté) */
+function showSug(q) { /* à implémenter si nécessaire */ }
+function hideSug()  { /* à implémenter si nécessaire */ }
+
 function handleInput() {
   clearTimeout(_sugTimer);
   const q = document.getElementById('s-input').value.trim();
@@ -462,7 +466,7 @@ function exportSave() {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'homepage-settings.json';
-  a.click(); URL.revokeObjectURL(a.href);
+  a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 100);
 }
 
 function importSave(e) {
