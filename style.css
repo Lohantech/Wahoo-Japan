@@ -469,7 +469,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
   background:none; 
   border:none; 
   outline:none;
-  font-size:max(15px, 1 em); 
+  font-size:max(16px, 1em); 
   color:var(--t1); 
 }
 #s-input::placeholder { color:var(--t5); }
