@@ -33,7 +33,9 @@
   --s3: 0 2px 8px rgba(0,0,0,.12);
 
   /* Radius */
-  --r: 2px;
+  --r: 8px;
+  --r2: 20px;
+  --r3: 16px;
 }
 
 /* ═══════════════════════════════════════
@@ -317,7 +319,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
   padding:8px 5px; border-radius:var(--r); cursor:pointer;
   text-align:center; font-size:11px; font-weight:800;
   color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.4);
-  border:2px solid transparent;
+  border-left:2.5px solid transparent ;
   transition:transform .18s, box-shadow .18s, border-color .18s;
 }
 .spill:hover { transform:scale(1.05); }
@@ -453,7 +455,8 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
   flex:1; display:flex; align-items:center;
   padding:0 14px; height:44px;
   background:var(--panel);
-  border:2px solid var(--bd2); border-radius:var(--r);
+  border:2px solid var(--bd2); 
+  border-radius:var(--r2);
   box-shadow:var(--s1);
   transition:border-color .2s, box-shadow .2s;
 }
@@ -474,7 +477,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
 #s-btn {
   display:flex; align-items:center; gap:7px;
   height:44px; padding:0 18px;
-  border-radius:var(--r); border:2px solid var(--o);
+  border-radius:var(--r2); border:2px solid var(--o);
   background:var(--o); color:#fff;
   font-family:inherit; font-size:13px; font-weight:800;
   cursor:pointer; flex-shrink:0; letter-spacing:.3px;
@@ -538,6 +541,7 @@ body.season-hiver     #nav-time { color:#3b8cff; }
 	min-width: 280px;
 	max-width: 480px;
 	text-align: center;
+  border-radius: var(--r3);
 }
 
 #clock-wrap {
@@ -803,13 +807,17 @@ code.pill {
   background: var(--panel2);
 }
 
-#drawer-tabs { display: flex; flex: 1; }
+#drawer-tabs { display: flex; 
+  flex: 1;
+  /*gap: 4px;*/
+ }
 
 .drw-tab {
   flex: 1;
   padding: 11px 8px;
   background: none;
   border: none;
+  /*border-radius: 10px;*/
   cursor: pointer;
   font-family: inherit;
   font-size: 12px;
