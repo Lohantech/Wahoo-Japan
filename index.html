@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="auto">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,10 +81,27 @@
         <div id="tz-badge"></div>
       </div>
       <div id="greeting"></div>
+      <div id="welcome-phrase" class="welcome-phrase"></div>
     </div>
 
-    <div id="shortcuts-wrapper">
-      <div id="shortcuts-container"></div>
+    <div id="services-bar">
+      <div class="services-grid">
+        <a href="https://mail.yahoo.co.jp/" class="service-link" data-t="Mail">📧 メール</a>
+        <a href="https://transit.yahoo.co.jp/" class="service-link" data-t="Transit">🚉 乗換案内</a>
+        <a href="https://news.yahoo.co.jp/" class="service-link" data-t="News">📰 ニュース</a>
+        <a href="https://weather.yahoo.co.jp/weather/" class="service-link" data-t="Weather">☀️ 天気</a>
+      </div>
+      <div class="services-sep"></div>
+
+        <div id="shortcuts-wrapper">
+          <div id="shortcuts-header">
+            <span data-t="shortcutsTitle">マイショートカット</span>
+            <button onclick="openShortcutModal()" class="add-shortcut-small" data-t="addShortcut">Add a Shortcut</button>
+          </div>
+          <div id="shortcuts-container"></div>
+        </div>
+
+      </div>
     </div>
 
   </main>

@@ -15,7 +15,7 @@ const T = {
     placeholder:'Search…', searchBtn:'Search',
     footerLeft:'2025 - 2026 © Wahoo! Japan — We respect your privacy. You can reset to default anytime. For more information, visit:',
     footerRight:'❓Help',
-    greetMorn:'Good morning ☀️', greetAfter:'Good afternoon 🌤️', greetEve:'Good evening 🌆', greetNight:'Good night 🌙',
+    greetMorn:'Good morning', greetAfter:'Good afternoon', greetEve:'Good evening', greetNight:'Good night',
     Mail:'Mail', Transit:'Transit', News:'News', Weather:'Weather',
     modalTitle:'🔧 Custom Engine',
     modalDesc:'Enter the search URL with {searchTerms} in place of your query.',
@@ -23,8 +23,13 @@ const T = {
     modalUrlPh:'https://…?q={searchTerms}', modalNamePh:'Engine name (e.g. Qwant)',
     modalCancel:'Cancel', modalSave:'Save',
     dateFn: d => d.toLocaleDateString('en-GB', { weekday:'long', year:'numeric', month:'long', day:'numeric' }),
-    shortcutsTitle:'Shortcuts', addShortcut:'Add a Shortcut',
+    shortcutsTitle:'My Shortcuts', addShortcut:'Add a Shortcut',
     shortcutModalTitle:'🔗 New Shortcut', IconShortcut:'📁 Icon (optional)',
+    quickServices:'Quick Services',
+    welcomeMorn:'Have a great day',
+    welcomeAfter:'Let\'s do our best',
+    welcomeEve:'Time to relax',
+    welcomeNight:'Sweet dreams',
   },
   jp: {
     persoBtn:'パーソナライズ', settingsBtn:'設定',
@@ -39,16 +44,21 @@ const T = {
     placeholder:'検索…', searchBtn:'検索',
     footerLeft:'2025 - 2026 © Wahoo! Japan — あなたのプライバシーを尊重します。いつでもデフォルトに戻せます。詳細はこちら：',
     footerRight:'❓ヘルプ',
-    greetMorn:'おはようございます ☀️', greetAfter:'こんにちは 🌤️', greetEve:'こんばんは 🌆', greetNight:'おやすみなさい 🌙',
+    greetMorn:'おはようございます', greetAfter:'こんにちは', greetEve:'こんばんは', greetNight:'おやすみなさい',
     modalTitle:'🔧 カスタムエンジン',
     modalDesc:'クエリの代わりに {searchTerms} を含む検索URLを入力してください。',
     modalExample:'例: https://search.example.com/?q={searchTerms}',
     modalUrlPh:'https://…?q={searchTerms}', modalNamePh:'エンジン名（例：Qwant）',
     modalCancel:'キャンセル', modalSave:'保存',
     dateFn: d => `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${['日','月','火','水','木','金','土'][d.getDay()]}）`,
-    shortcutsTitle:'ショートカット', addShortcut:'ショートカットを追加',
+    shortcutsTitle:'マイショートカット', addShortcut:'ショートカットを追加',
     shortcutModalTitle:'🔗 新しいショートカット', IconShortcut:'📁 アイコン（任意）',
-    Mail:'メイル', Transit:'トラジット', News:'ニュース', Weather:'天気',
+    Mail:'メイル', Transit:'乗換案内', News:'ニュース', Weather:'天気',
+    quickServices:'クイックサービス',
+    welcomeMorn:'素敵な一日を',
+    welcomeAfter:'今日もがんばりましょう',
+    welcomeEve:'ゆったり過ごしましょう',
+    welcomeNight:'いい夢を',
   }
 };
 
@@ -272,8 +282,29 @@ function updateClock() {
       h < 22            ? L.greetEve :
                           L.greetNight;
   } catch(e) {}
+  updateWelcomePhrase();
 }
 setInterval(updateClock, 1000);
+
+/* ═══════════════════════════════════════════════════
+   WELCOME PHRASE (heure-dépendante)
+═══════════════════════════════════════════════════ */
+function updateWelcomePhrase() {
+  try {
+    const h = parseInt(
+      new Intl.DateTimeFormat('en-GB', { timeZone: st.timezone, hour: 'numeric', hour12: false }).format(new Date()),
+      10
+    );
+    const L = T[st.lang];
+    let phrase = '';
+    if      (h >= 5 && h < 12) phrase = L.welcomeMorn;
+    else if (h < 17)           phrase = L.welcomeAfter;
+    else if (h < 22)           phrase = L.welcomeEve;
+    else                       phrase = L.welcomeNight;
+    const el = document.getElementById('welcome-phrase');
+    if (el) el.textContent = phrase;
+  } catch(e) {}
+}
 
 /* ═══════════════════════════════════════════════════
    MOTEUR DE RECHERCHE
@@ -354,13 +385,17 @@ function setSeason(name, el) {
 }
 
 function spawnParticles(s) {
-  const c = document.getElementById('particles'); c.innerHTML = '';
-  const em = SP[s]; if (!em.length) return;
-  const count = s === 'printemps' ? 22 : s === 'hiver' ? 26 : 18;
+  const c = document.getElementById('particles');
+  if (!c) return;
+  c.innerHTML = '';
+  const em = SP[s] || [];
+  if (!em.length) return;
+  const count = s === 'printemps' ? 12 : s === 'hiver' ? 14 : 10;
   for (let i = 0; i < count; i++) {
-    const el = document.createElement('div'); el.className = 'particle';
+    const el = document.createElement('div');
+    el.className = 'particle';
     el.textContent = em[i % em.length];
-    el.style.cssText = `left:${Math.random()*100}%;font-size:${12+Math.random()*16}px;animation-duration:${7+Math.random()*13}s;animation-delay:-${Math.random()*14}s;--dx:${(Math.random()-.5)*130}px;opacity:${.55+Math.random()*.45}`;
+    el.style.cssText = `left:${Math.random()*100}%;font-size:${13+Math.random()*11}px;animation-duration:${14+Math.random()*18}s;animation-delay:-${Math.random()*20}s;--dx:${(Math.random()-.5)*60}px;opacity:${.35+Math.random()*.25}`;
     c.appendChild(el);
   }
 }
@@ -633,7 +668,7 @@ function renderShortcuts() {
   if (cont) {
     cont.innerHTML = (st.shortcuts || []).map(sc =>
       `<a class="sc-item" href="${sc.url}" target="_blank" rel="noopener" title="${sc.name}">
-        <div class="sc-icon-wrap">${_scIconHtml(sc, 28)}</div>
+        <div class="sc-icon-wrap">${_scIconHtml(sc, 32)}</div>
         <div class="sc-lbl">${sc.name}</div>
       </a>`
     ).join('');
@@ -662,6 +697,7 @@ function loadShortcuts() {
   } catch(e) {}
 }
 
+
 /* ═══════════════════════════════════════════════════
    INIT
 ═══════════════════════════════════════════════════ */
@@ -678,6 +714,8 @@ function init() {
   renderShortcuts();
   spawnParticles(st.season);
   updateClock();
+  updateWelcomePhrase();
+  setInterval(updateWelcomePhrase, 60000);
   /* ── Ajuste le layer wallpaper sous les navbars ── */
   function setNavHeight() {
     const tb = document.getElementById('topbar');
