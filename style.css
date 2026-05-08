@@ -36,6 +36,8 @@
   --r: 12px;
   --r2: 28px;
   --r3: 20px;
+  --r4: 8px;
+
 }
 
 /* ═══════════════════════════════════════
@@ -422,7 +424,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
   padding:0 14px; height: 39px;
   background:var(--panel);
   border:2px solid var(--bd2); 
-  border-radius:var(--r2);
+  border-radius:var(--r4);
   box-shadow:var(--s1);
   transition:border-color .2s, box-shadow .2s;
 }
@@ -443,7 +445,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
 #s-btn {
   display:flex; align-items:center; gap:7px;
   height: 39px; padding:0 18px;
-  border-radius:var(--r2); border:2px solid var(--o);
+  border-radius:var(--r4); border:2px solid var(--o);
   background:var(--o); color:#fff;
   font-family:inherit; font-size:13px; font-weight:800;
   cursor:pointer; flex-shrink:0; letter-spacing:.3px;
