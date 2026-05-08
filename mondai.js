@@ -130,9 +130,9 @@ document.addEventListener('click', e => {
    STATE
 ═══════════════════════════════════════════════════ */
 const ENGINES = {
-  google:     { name:'Google',       url:'https://www.google.com/search?q={q}&hl={l}' },
+  google:     { name:'Google',       url:'https://www.google.com/search?q={q}' },
   yahoojp:    { name:'Yahoo! JAPAN', url:'https://search.yahoo.co.jp/search?p={q}' },
-  bing:       { name:'Bing',         url:'https://www.bing.com/search?q={q}&setlang={l}' },
+  bing:       { name:'Bing',         url:'https://www.bing.com/search?q={q}' },
   yahoo:      { name:'Yahoo!',       url:'https://search.yahoo.com/search?p={q}' },
   duckduckgo: { name:'DuckDuckGo',   url:'https://duckduckgo.com/?q={q}' },
   ecosia:     { name:'Ecosia',       url:'https://www.ecosia.org/search?q={q}' },
@@ -143,28 +143,10 @@ let st = {
   wallpaper:'none', custom:null, panel:null,
   timezone:'Europe/London', tzLocked:false,
   customSlots:[null,null,null,null,null],
-  mode:'light', overlay:true,
+  overlay:true,
   shortcuts:[],
 };
 let _pendingSlot = -1;
-
-/* ═══════════════════════════════════════════════════
-   MODE CLAIR/SOMBRE
-═══════════════════════════════════════════════════ */
-function toggleMode() {
-  st.mode = st.mode === 'dark' ? 'light' : 'dark';
-  applyMode(); save();
-}
-
-function applyMode() {
-  const isLight = st.mode === 'light';
-  document.body.classList.toggle('mode-light', isLight);
-  const btn = document.getElementById('mode-btn');
-  if (btn) btn.textContent = isLight ? 'Mode ☀️' : 'Mode 🌙';
-  const vis = st.overlay;
-  document.getElementById('season-overlay').style.display = vis ? '' : 'none';
-  document.getElementById('toggle-overlay')?.classList.toggle('on', vis);
-}
 
 /* ═══════════════════════════════════════════════════
    SEASON OVERLAY TOGGLE
@@ -175,6 +157,13 @@ function toggleOverlay() {
   document.getElementById('season-overlay').style.display = st.overlay ? '' : 'none';
   save();
 }
+
+function applyMode() {
+  const vis = st.overlay;
+  document.getElementById('season-overlay').style.display = vis ? '' : 'none';
+  document.getElementById('toggle-overlay')?.classList.toggle('on', vis);
+}
+
 
 /* ═══════════════════════════════════════════════════
    DRAWER COULISSANT
@@ -287,7 +276,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 
 /* ═══════════════════════════════════════════════════
-   WELCOME PHRASE (heure-dépendante)
+   WELCOME 
 ═══════════════════════════════════════════════════ */
 function updateWelcomePhrase() {
   try {
@@ -307,7 +296,7 @@ function updateWelcomePhrase() {
 }
 
 /* ═══════════════════════════════════════════════════
-   MOTEUR DE RECHERCHE
+   Engine
 ═══════════════════════════════════════════════════ */
 function setEng(el) {
   document.querySelectorAll('[data-eng]').forEach(r => r.classList.remove('sel'));
@@ -351,9 +340,8 @@ function doSearch() {
 
 let _sugTimer;
 
-/* showSug / hideSug — stubs (autocomplete non implémenté) */
-function showSug(q) { /* à implémenter si nécessaire */ }
-function hideSug()  { /* à implémenter si nécessaire */ }
+function showSug(q) {  }
+function hideSug()  {  }
 
 function handleInput() {
   clearTimeout(_sugTimer);
@@ -401,7 +389,7 @@ function spawnParticles(s) {
 }
 
 /* ═══════════════════════════════════════════════════
-   FOND D'ÉCRAN — presets
+   FOND D'ÉCRAN 
 ═══════════════════════════════════════════════════ */
 function setWP(wp, el) {
   document.querySelectorAll('.wp-t,.cslot').forEach(t => t.classList.remove('sel'));
@@ -514,8 +502,7 @@ function importSave(e) {
 }
 
 /* ═══════════════════════════════════════════════════
-   PERSIST — demande le stockage persistant (évite que
-   Firefox Linux efface le localStorage à la fermeture)
+   Firefox 
 ═══════════════════════════════════════════════════ */
 function requestPersistentStorage() {
   if (navigator.storage && navigator.storage.persist) {
@@ -716,7 +703,6 @@ function init() {
   updateClock();
   updateWelcomePhrase();
   setInterval(updateWelcomePhrase, 60000);
-  /* ── Ajuste le layer wallpaper sous les navbars ── */
   function setNavHeight() {
     const tb = document.getElementById('topbar');
     const nb = document.getElementById('nav-bar');
