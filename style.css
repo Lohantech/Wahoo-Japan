@@ -444,7 +444,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
 
 #s-btn {
   display:flex; align-items:center; gap:7px;
-  height: 39px; padding:0 18px;
+  height: 39px; padding:0 34px;
   border-radius:var(--r4); border:2px solid var(--o);
   background:var(--o); color:#fff;
   font-family:inherit; font-size:13px; font-weight:800;
