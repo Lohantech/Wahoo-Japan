@@ -2,63 +2,17 @@
    TRANSLATIONS — EN & JP
 ═══════════════════════════════════════════════════ */
 const T = {
-  en: {
-    persoBtn:'Personalise', settingsBtn:'Settings',
-    seasonTitle:'Season Theme',
-    tDefault:'Default', tSpring:'🌸 Spring', tSummer:'☀️ Summer', tAutumn:'🍂 Autumn', tWinter:'❄️ Winter',
-    wpTitle:'Wallpaper', wpDefault:'Default',
-    myPhotosTitle:'My Photos (5 slots)',
-    engineTitle:'Search Engine', eCustom:'Other engine…',
-    langTitle:'Language',
-    tzTitle:'Timezone', tzSearch:'Search timezone…', tzReset:'Auto',
-    backupTitle:'Backup', exportBtn:'Export settings', importBtn:'Import settings',
-    placeholder:'Search…', searchBtn:'Search',
-    footerLeft:'2025 - 2026 © Wahoo! Japan — We respect your privacy. You can reset to default anytime. For more information, visit:',
-    footerRight:'❓Help',
-    greetMorn:'Good morning', greetAfter:'Good afternoon', greetEve:'Good evening', greetNight:'Good night',
-    Mail:'Mail', Transit:'Transit', News:'News', Weather:'Weather',
-    modalTitle:'🔧 Custom Engine',
-    modalDesc:'Enter the search URL with {searchTerms} in place of your query.',
-    modalExample:'e.g. https://search.example.com/?q={searchTerms}',
-    modalUrlPh:'https://…?q={searchTerms}', modalNamePh:'Engine name (e.g. Qwant)',
-    modalCancel:'Cancel', modalSave:'Save',
-    dateFn: d => d.toLocaleDateString('en-GB', { weekday:'long', year:'numeric', month:'long', day:'numeric' }),
-    shortcutsTitle:'My Shortcuts', addShortcut:'Add a Shortcut',
-    shortcutModalTitle:'🔗 New Shortcut', IconShortcut:'📁 Icon (optional)',
-    quickServices:'Quick Services',
-    welcomeMorn:'Have a great day',
-    welcomeAfter:'Let\'s do our best',
-    welcomeEve:'Time to relax',
-    welcomeNight:'Sweet dreams',
-  },
   jp: {
-    persoBtn:'パーソナライズ', settingsBtn:'設定',
-    seasonTitle:'季節テーマ',
-    tDefault:'デフォルト', tSpring:'🌸 春', tSummer:'☀️ 夏', tAutumn:'🍂 秋', tWinter:'❄️ 冬',
-    wpTitle:'壁紙', wpDefault:'デフォルト',
-    myPhotosTitle:'マイ写真（5枠）',
-    engineTitle:'検索エンジン', eCustom:'他のエンジン…',
-    langTitle:'言語',
-    tzTitle:'タイムゾーン', tzSearch:'タイムゾーンを検索…', tzReset:'自動',
-    backupTitle:'バックアップ', exportBtn:'設定をエクスポート', importBtn:'設定をインポート',
-    placeholder:'検索…', searchBtn:'検索',
-    footerLeft:'2025 - 2026 © Wahoo! Japan — あなたのプライバシーを尊重します。いつでもデフォルトに戻せます。詳細はこちら：',
-    footerRight:'❓ヘルプ',
     greetMorn:'おはようございます', greetAfter:'こんにちは', greetEve:'こんばんは', greetNight:'おやすみなさい',
-    modalTitle:'🔧 カスタムエンジン',
-    modalDesc:'クエリの代わりに {searchTerms} を含む検索URLを入力してください。',
-    modalExample:'例: https://search.example.com/?q={searchTerms}',
-    modalUrlPh:'https://…?q={searchTerms}', modalNamePh:'エンジン名（例：Qwant）',
-    modalCancel:'キャンセル', modalSave:'保存',
     dateFn: d => `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${['日','月','火','水','木','金','土'][d.getDay()]}）`,
-    shortcutsTitle:'マイショートカット', addShortcut:'ショートカットを追加',
-    shortcutModalTitle:'🔗 新しいショートカット', IconShortcut:'📁 アイコン（任意）',
-    Mail:'メイル', Transit:'乗換案内', News:'ニュース', Weather:'天気',
-    quickServices:'クイックサービス',
     welcomeMorn:'素敵な一日を',
     welcomeAfter:'今日もがんばりましょう',
     welcomeEve:'ゆったり過ごしましょう',
     welcomeNight:'いい夢を',
+    placeholder:'検索…', searchBtn:'検索',
+    tzSearch:'タイムゾーンを検索…', tzReset:'自動',
+
+
   }
 };
 
@@ -133,13 +87,12 @@ const ENGINES = {
   google:     { name:'Google',       url:'https://www.google.com/search?q={q}' },
   yahoojp:    { name:'Yahoo! JAPAN', url:'https://search.yahoo.co.jp/search?p={q}' },
   bing:       { name:'Bing',         url:'https://www.bing.com/search?q={q}' },
-  yahoo:      { name:'Yahoo!',       url:'https://search.yahoo.com/search?p={q}' },
   duckduckgo: { name:'DuckDuckGo',   url:'https://duckduckgo.com/?q={q}' },
   ecosia:     { name:'Ecosia',       url:'https://www.ecosia.org/search?q={q}' },
 };
 
 let st = {
-  lang:'en', engine:'google', season:'default',
+  lang:'auto', engine:'google', season:'default',
   wallpaper:'none', custom:null, panel:null,
   timezone:'Europe/London', tzLocked:false,
   customSlots:[null,null,null,null,null],
@@ -189,10 +142,8 @@ function switchDrawerTab(tab) {
   document.getElementById('drw-param').classList.toggle('hidden', tab !== 'param');
 }
 
-/* Fermer le drawer sur Escape */
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
-/* Compatibilité : togglePanel redirige vers le drawer */
 function togglePanel(n) { openDrawer(n); }
 function closeAll() { closeDrawer(); }
 
@@ -211,7 +162,7 @@ function setLang(lang, el) {
 
 function applyLang() {
   const L = T[st.lang];
-  document.documentElement.lang = st.lang === 'jp' ? 'ja' : 'en';
+  document.documentElement.lang = st.lang === 'jp' ;
   document.querySelectorAll('[data-t]').forEach(el => {
     const k = el.getAttribute('data-t');
     if (L[k] !== undefined) el.textContent = L[k];
@@ -236,7 +187,6 @@ function applyLang() {
 function updateClock() {
   const tz = st.timezone, now = new Date();
   try {
-    // Heure complète pour la carte centrale
     const tp = new Intl.DateTimeFormat('en-GB', {
       timeZone:tz, hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false
     }).formatToParts(now);
@@ -244,21 +194,17 @@ function updateClock() {
     const clockEl = document.getElementById('clock');
     if (clockEl) clockEl.textContent = `${get('hour')}:${get('minute')}:${get('second')}`;
 
-    // Date locale
     const ld = new Date(now.toLocaleString('en-US', { timeZone: tz }));
     const dateStr = T[st.lang].dateFn(ld);
     const dateEl = document.getElementById('date-line');
     if (dateEl) dateEl.textContent = dateStr;
 
-    // Heure compacte (HH:MM) pour la nav-bar
     const navTime = document.getElementById('nav-time');
     if (navTime) navTime.textContent = `${get('hour')}:${get('minute')}`;
 
-    // Date dans la nav-bar
     const navDate = document.getElementById('nav-date');
     if (navDate) navDate.textContent = dateStr;
 
-    // Message de salutation
     const h = parseInt(
       new Intl.DateTimeFormat('en-GB', { timeZone:tz, hour:'numeric', hour12:false }).format(now),
       10

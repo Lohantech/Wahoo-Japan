@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="auto">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,25 +20,23 @@
 
   <div id="topbar">
     <div id="tb-links">
-      <a data-t="Mail" href="https://mail.yahoo.co.jp/">Mail</a>
-      <a data-t="Transit" href="https://transit.yahoo.co.jp/">Transit</a>
-      <a data-t="News" href="https://news.yahoo.co.jp/">News</a>
-      <a data-t="Weather" href="https://weather.yahoo.co.jp/weather/">Weather</a>
-      <p>FR: La langue En sera prohainement supprimer ainsi que Yahoo! USA</p>
-<p>EN: The EN language deleted and Yahoo Search USA</p>
+      <a data-t="Mail" href="https://mail.yahoo.co.jp/">メイル</a>
+      <a data-t="Transit" href="https://transit.yahoo.co.jp/">乗換案内</a>
+      <a data-t="News" href="https://news.yahoo.co.jp/">ニュース</a>
+      <a data-t="Weather" href="https://weather.yahoo.co.jp/weather/">天気</a>
     </div>
 
     <div id="tb-right">
       <button class="hbtn" onclick="openDrawer('perso')" title="Personnaliser">
         <img src="aero_touch/art.png" alt="Personnalise" style="width:20px;height:20px">
-        <span data-t="persoBtn">Personalise</span>
+        <span data-t="persoBtn">パーソナライズ</span>
       </button>
       <button class="hbtn" onclick="openDrawer('param')" title="Settings">
         <img src="aero_touch/re.png" alt="Settings" style="width:20px;height:20px">
-        <span data-t="settingsBtn">Settings</span>
+        <span data-t="settingsBtn">設定</span>
       </button>
     </div>
-    <a href="https://help.japan-vi.be" id="f-right" data-t="footerRight">❓Help</a>
+    <a href="https://help.japan-vi.be" id="f-right" data-t="footerRight">ヘルプ</a>
     </div>
 
   <div id="nav-bar">
@@ -52,12 +50,12 @@
       <div id="search-anchor">
         <div id="search-row">
           <div id="search-box">
-            <input type="text" id="s-input" placeholder="Search…" autocomplete="off"
+            <input type="text" id="s-input" placeholder="検索…" autocomplete="off"
               oninput="handleInput()" onkeydown="if(event.key==='Enter')doSearch();">
           </div>
           <button id="s-btn" onclick="doSearch()">
             <img src="aero_touch/search.png" alt="Search" id="s-btn-icon">
-            <span id="s-btn-label" data-t="searchBtn">Search</span>
+            <span id="s-btn-label" data-t="searchBtn">検索</span>
           </button>
         </div>
       </div>
@@ -96,7 +94,7 @@
         <div id="shortcuts-wrapper">
           <div id="shortcuts-header">
             <span data-t="shortcutsTitle">マイショートカット</span>
-            <button onclick="openShortcutModal()" class="add-shortcut-small" data-t="addShortcut">Add a Shortcut</button>
+            <button onclick="openShortcutModal()" class="add-shortcut-small" data-t="addShortcut">ショートカットを追加</button>
           </div>
           <div id="shortcuts-container"></div>
         </div>
@@ -107,39 +105,39 @@
   </main>
 
   <footer id="footer">
-    <span id="f-left" data-t="footerLeft">2025 - 2026 © Wahoo! Japan — We respect your privacy. You can reset to default anytime. For more information, visit:</span>
+    <span id="f-left" data-t="footerLeft">2025 - 2026 © Wahoo! Japan — あなたのプライバシーを尊重します。いつでもデフォルトに戻せます。詳細はこちら：</span>
     <span></span>
-    <a href="https://help.japan-vi.be" id="f-right" data-t="footerRight">❓Help</a>
+    <a href="https://help.japan-vi.be" id="f-right" data-t="footerRight">❓ヘルプ</a>
   </footer>
 </div>
 
 <div id="modal">
   <div id="modal-inner">
-    <h3 data-t="modalTitle">🔧 Custom Engine</h3>
-    <p data-t="modalDesc">Enter the search URL with <code class="pill">{searchTerms}</code> in place of your query.</p>
-    <p style="font-size:11px;opacity:.45;margin-top:-6px" data-t="modalExample">e.g. https://search.example.com/?q={searchTerms}</p>
+    <h3 data-t="modalTitle">🔧 カスタムエンジン</h3>
+    <p data-t="modalDesc">クエリの代わりに <code class="pill">{searchTerms}</code>を含む検索URLを入力してください。</p>
+    <p style="font-size:11px;opacity:.45;margin-top:-6px" data-t="modalExample">例: https://search.example.com/?q={searchTerms}</p>
     <input class="minput" type="text" id="m-url" placeholder="https://…?q={searchTerms}">
-    <input class="minput" type="text" id="m-name" placeholder="Engine name">
+    <input class="minput" type="text" id="m-name" placeholder="エンジン名">
     <div class="mbtns">
-      <button class="mbtn cancel" onclick="closeModal()" data-t="modalCancel">Cancel</button>
-      <button class="mbtn ok" onclick="saveCustomEng()" data-t="modalSave">Save</button>
+<button class="mbtn cancel" onclick="closeModal()" data-t="modalCancel">キャンセル</button>
+      <button class="mbtn ok" onclick="saveCustomEng()" data-t="modalSave">保存</button>
     </div>
   </div>
 </div>
 
 <div id="shortcut-modal">
   <div class="modal-inner">
-    <h3 data-t="shortcutModalTitle">🔗 New Shortcut</h3>
+    <h3 data-t="shortcutModalTitle">🔗 新しいショートカット</h3>
     <input class="minput" type="text" id="sc-url" placeholder="https://...">
-    <input class="minput" type="text" id="sc-name" placeholder="Name (optional)">
+    <input class="minput" type="text" id="sc-name" placeholder="名前（任意）">
     <div class="icon-upload-row">
-      <label for="sc-icon-file" class="mbtn cancel" style="flex:1;text-align:center;" data-t="IconShortcut">📁 Icon (optional)</label>
+      <label for="sc-icon-file" class="mbtn cancel" style="flex:1;text-align:center;" data-t="IconShortcut">📁 アイコン（任意）</label>
       <input type="file" id="sc-icon-file" accept="image/*" style="display:none">
       <span id="sc-icon-preview"></span>
     </div>
     <div class="mbtns">
-      <button class="mbtn cancel" onclick="closeShortcutModal()" data-t="modalCancel">Cancel</button>
-      <button class="mbtn ok" onclick="saveShortcut()" data-t="modalSave">Save</button>
+      <button class="mbtn cancel" onclick="closeShortcutModal()" data-t="modalCancel">キャンセル</button>
+      <button class="mbtn ok" onclick="saveShortcut()" data-t="modalSave">保存</button>
     </div>
   </div>
 </div>
@@ -150,37 +148,37 @@
     <div id="drawer-tabs">
       <button class="drw-tab active" data-tab="perso" onclick="switchDrawerTab('perso')">
         <img src="aero_touch/art.png" alt="Personnalise" style="width:20px;height:20px;">
-        <span data-t="persoBtn">Personalise</span></button>
+        <span data-t="persoBtn">パーソナライズ</span></button>
       <button class="drw-tab" data-tab="param" onclick="switchDrawerTab('param')">
         <img src="aero_touch/re.png" alt="Personnaliser" style="width:20px;height:20px"> 
-        <span data-t="settingsBtn">Settings</span></button>
+        <span data-t="settingsBtn">設定</span></button>
     </div>
-    <button id="drawer-close-btn" onclick="closeDrawer()" title="Fermer">✕</button>
+    <button id="drawer-close-btn" onclick="closeDrawer()" title="Fermer">x</button>
   </div>
   <div id="drawer-body">
 
     <div id="drw-perso" class="drw-section">
-      <div class="dtitle" data-t="shortcutsTitle">Shortcuts</div>
+      <div class="dtitle" data-t="shortcutsTitle">マイショートカット</div>
       <div id="shortcuts-list"></div>
       <button class="action-row" id="add-shortcut-btn" onclick="openShortcutModal()">
         <span class="ar-icon">➕</span>
-        <span data-t="addShortcut">Add a Shortcut</span>
+        <span data-t="addShortcut">ショートカットを追加</span>
       </button>
       <div class="sep"></div>
-      <div class="dtitle" data-t="seasonTitle">Season Theme</div>
+      <div class="dtitle" data-t="seasonTitle">季節テーマ</div>
       <div id="season-grid">
-        <div class="spill sel" data-s="default" onclick="setSeason('default',this)" data-t-inner="tDefault">Default</div>
-        <div class="spill" data-s="printemps" onclick="setSeason('printemps',this)" data-t-inner="tSpring">🌸 Spring</div>
-        <div class="spill" data-s="ete" onclick="setSeason('ete',this)" data-t-inner="tSummer">☀️ Summer</div>
-        <div class="spill" data-s="automne" onclick="setSeason('automne',this)" data-t-inner="tAutumn">🍂 Autumn</div>
-        <div class="spill" data-s="hiver" onclick="setSeason('hiver',this)" data-t-inner="tWinter">❄️ Winter</div>
+        <div class="spill sel" data-s="default" onclick="setSeason('default',this)" data-t-inner="tDefault">デフォルト</div>
+        <div class="spill" data-s="printemps" onclick="setSeason('printemps',this)" data-t-inner="tSpring">🌸 春</div>
+        <div class="spill" data-s="ete" onclick="setSeason('ete',this)" data-t-inner="tSummer">☀️ 夏</div>
+        <div class="spill" data-s="automne" onclick="setSeason('automne',this)" data-t-inner="tAutumn">🍂 秋</div>
+        <div class="spill" data-s="hiver" onclick="setSeason('hiver',this)" data-t-inner="tWinter">❄️ 冬</div>
       </div>
       <div class="sep"></div>
-      <div class="dtitle" data-t="wpTitle">Wallpaper</div>
+      <div class="dtitle" data-t="wpTitle">壁紙</div>
       <div id="wp-grid">
         <div class="wp-t sel" data-wp="none" onclick="setWP('none',this)">
           <div class="wp-def" style="background:linear-gradient(135deg,#fff8f0,#ffe0c0)">🌸</div>
-          <div class="wp-lbl" data-t="wpDefault">Default</div>
+          <div class="wp-lbl" data-t="wpDefault">デフォルト</div>
         </div>
         <div class="wp-t" data-wp="picture/02.png" onclick="setWP('picture/02.png',this)">
           <img src="picture/02.png" alt="T1"><div class="wp-lbl">T1</div>
@@ -199,40 +197,35 @@
         </div>
       </div>
       <div class="sep"></div>
-      <div class="dtitle" data-t="myPhotosTitle">My Photos (5 slots)</div>
+      <div class="dtitle" data-t="myPhotosTitle">マイ写真（5枠）</div>
       <div id="custom-slots-grid"></div>
       <input type="file" id="slot-file" accept="image/*" style="display:none" onchange="onSlotFile(event)">
     </div>
 
     <div id="drw-param" class="drw-section hidden">
-      <div class="dtitle" data-t="engineTitle">Search Engine</div>
+      <div class="dtitle" data-t="engineTitle">検索エンジン</div>
       <div class="opt sel" data-eng="google" onclick="setEng(this)"><span class="dot"></span>Google</div>
       <div class="opt" data-eng="yahoojp" onclick="setEng(this)"><span class="dot"></span>Yahoo! JAPAN</div>
       <div class="opt" data-eng="bing" onclick="setEng(this)"><span class="dot"></span>Bing</div>
-      <div class="opt" data-eng="yahoo" onclick="setEng(this)"><span class="dot"></span>Yahoo! (USA)</div>
       <div class="opt" data-eng="duckduckgo" onclick="setEng(this)"><span class="dot"></span>DuckDuckGo</div>
       <div class="opt" data-eng="ecosia" onclick="setEng(this)"><span class="dot"></span>Ecosia</div>
-      <div class="opt" data-eng="custom" onclick="openModal()"><span class="dot"></span><em style="opacity:.65" data-t="eCustom">Other engine…</em></div>
+      <div class="opt" data-eng="custom" onclick="openModal()"><span class="dot"></span><em style="opacity:.65" data-t="eCustom">他のエンジン…</em></div>
       <div class="sep"></div>
-      <div class="dtitle" data-t="langTitle">Language</div>
-      <div class="opt sel" data-lang="en" onclick="setLang('en',this)"><span class="dot"></span>🇬🇧 English</div>
-      <div class="opt" data-lang="jp" onclick="setLang('jp',this)"><span class="dot"></span>🇯🇵 日本語</div>
-      <div class="sep"></div>
-      <div class="dtitle" data-t="tzTitle">Timezone</div>
-      <input type="text" id="tz-search" placeholder="Search timezone…" autocomplete="off"
+      <div class="dtitle" data-t="tzTitle">タイムゾーン</div>
+      <input type="text" id="tz-search" placeholder="タイムゾーンを検索…" autocomplete="off"
         oninput="filterTZ(this.value)" onfocus="filterTZ(this.value)">
       <div id="tz-list"></div>
       <div id="tz-info">
         <span id="tz-cur-label"></span>
-        <span id="tz-reset-btn" onclick="resetTZ()">Auto</span>
+        <span id="tz-reset-btn" onclick="resetTZ()">自動</span>
       </div>
       <div class="sep"></div>
-      <div class="dtitle" data-t="backupTitle">Backup</div>
+      <div class="dtitle" data-t="backupTitle">バックアップ</div>
       <div class="action-row" onclick="exportSave()">
-        <span class="ar-icon">📤</span><span data-t="exportBtn">Export settings</span>
+        <span class="ar-icon">📤</span><span data-t="exportBtn">設定をエクスポート</span>
       </div>
       <div class="action-row" onclick="document.getElementById('import-file').click()">
-        <span class="ar-icon">📥</span><span data-t="importBtn">Import settings</span>
+        <span class="ar-icon">📥</span><span data-t="importBtn">設定をインポート</span>
       </div>
       <input type="file" id="import-file" accept=".json" style="display:none" onchange="importSave(event)">
     </div>
