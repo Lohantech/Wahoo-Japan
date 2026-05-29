@@ -1,8 +1,8 @@
 /* ═══════════════════════════════════════════════════
-   TRANSLATIONS — EN & JP
+   JA
 ═══════════════════════════════════════════════════ */
 const T = {
-  jp: {
+  ja: {
     greetMorn:'おはようございます', greetAfter:'こんにちは', greetEve:'こんばんは', greetNight:'おやすみなさい',
     dateFn: d => `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${['日','月','火','水','木','金','土'][d.getDay()]}）`,
     welcomeMorn:'素敵な一日を',
@@ -64,7 +64,7 @@ function selectTZ(tz) {
 
 function resetTZ() {
   st.tzLocked = false;
-  st.timezone = st.lang === 'jp' ? 'Asia/Tokyo' : 'Europe/London';
+  st.timezone = st.lang === 'ja' ? 'Asia/Tokyo' : 'Europe/London';
   updateTZLabel(); save();
 }
 
@@ -154,7 +154,7 @@ function setLang(lang, el) {
   st.lang = lang;
   document.querySelectorAll('[data-lang]').forEach(r => r.classList.remove('sel'));
   if (el) el.classList.add('sel');
-  if (!st.tzLocked) st.timezone = lang === 'jp' ? 'Asia/Tokyo' : 'Europe/London';
+  if (!st.tzLocked) st.timezone = lang === 'ja' ? 'Asia/Tokyo' : 'Europe/London';
   updateTZLabel();
   applyLang();
   save();
@@ -162,7 +162,7 @@ function setLang(lang, el) {
 
 function applyLang() {
   const L = T[st.lang];
-  document.documentElement.lang = st.lang === 'jp' ;
+  document.documentElement.lang = st.lang = 'ja' ;
   document.querySelectorAll('[data-t]').forEach(el => {
     const k = el.getAttribute('data-t');
     if (L[k] !== undefined) el.textContent = L[k];
@@ -273,7 +273,7 @@ function saveCustomEng() {
    SEARCH
 ═══════════════════════════════════════════════════ */
 function buildURL(q) {
-  const l = st.lang === 'jp' ? 'ja' : 'en';
+  const l = st.lang === 'ja' ? 'ja' : 'en';
   const e = ENGINES[st.engine] || st.custom;
   if (!e) return 'https://www.google.com/search?q=' + encodeURIComponent(q);
   return e.url.replace('{q}', encodeURIComponent(q)).replace(/{l}/g, l);
@@ -493,7 +493,7 @@ function applyState(d) {
   }
   st.tzLocked = !!d.tzLocked;
   if (d.timezone) st.timezone = d.timezone;
-  else if (!st.tzLocked) st.timezone = st.lang === 'jp' ? 'Asia/Tokyo' : 'Europe/London';
+  else if (!st.tzLocked) st.timezone = st.lang === 'ja' ? 'Asia/Tokyo' : 'Europe/London';
   updateTZLabel();
   if (d.engine) {
     st.engine = d.engine;
