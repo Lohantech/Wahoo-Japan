@@ -33,10 +33,9 @@
   --s3: 0 2px 8px rgba(0,0,0,.12);
 
   /* Radius */
-  --r: 12px;
-  --r2: 28px;
-  --r3: 20px;
-  --r4: 8px;
+  --r: 6px;
+  --r2: 4px;
+  --r4: 99999px;
 
 }
 
@@ -242,7 +241,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
   font-size:12px; font-family:inherit; outline:none;
   transition:border-color .15s, box-shadow .15s;
 }
-#tz-search:focus     { border-color:var(--o); box-shadow:0 0 0 2px var(--og); }
+#tz-search:focus     {box-shadow:0 0 0 2px var(--s1); }
 #tz-search::placeholder { color:var(--t5); }
 
 #tz-list {
@@ -503,7 +502,7 @@ body.season-hiver     #nav-time { color:#3b8cff; }
   text-align: center;
   min-width: 280px;
   max-width: 480px;
-  border-radius: 12px;
+  border-radius: var(--r2);
 }
 
 #clock-wrap {
@@ -548,7 +547,7 @@ body.season-hiver     #clock { color:#3b8cff; text-shadow:0 2px 14px rgba(147,19
   max-width: 770px;
   background: var(--panel);
   border: 1px solid var(--bd2);
-  border-radius: 10px;
+  border-radius: var(--r2);
   padding: 12px 10px;
 }
 
@@ -635,8 +634,6 @@ body.season-hiver .particle     { opacity: 0.4; }
 
 #shortcuts-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(68px, 76px));
-  gap: 8px;
   justify-content: start;
 }
 
@@ -644,9 +641,8 @@ body.season-hiver .particle     { opacity: 0.4; }
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 4px;
-	padding: 8px 10px 7px;
-	border-radius: var(--r);
+	padding: 5px 13px 9px;
+	border-radius: var(--r2);
 	background: rgba(255,255,255,.90);
 	border: 1px solid var(--bd);
 	text-decoration: none;
@@ -689,7 +685,6 @@ body.season-hiver .particle     { opacity: 0.4; }
   text-align:center; line-height:1.2;
 }
 
-/* Shortcuts list in perso panel */
 #shortcuts-list { display:flex; flex-direction:column; gap:4px; }
 
 .sc-row {
@@ -814,7 +809,7 @@ code.pill {
   .service-link { font-size:11px; }
 
   #shortcuts-wrapper { width: 100%; }
-  #shortcuts-container { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap:6px; }
+  #shortcuts-container { gap:6px; grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));}
 
   #s-btn-label { display:none; }
   #s-btn       { padding:0 14px; }
@@ -822,7 +817,6 @@ code.pill {
 
   #footer { flex-direction:column; gap:4px; text-align:center; font-size:8px; padding:2px; }
   #main { justify-content: flex-start; }
-  #shortcuts-container { gap:6px; grid-template-columns:repeat(auto-fill, minmax(68px, 76px)); }
   .sc-item { padding:7px 4px; }
   .sc-icon-wrap { width:30px; height:30px; }
   .sc-letter    { width:24px; height:24px; font-size:11px; }
