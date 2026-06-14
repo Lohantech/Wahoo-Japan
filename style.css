@@ -635,6 +635,9 @@ body.season-hiver .particle     { opacity: 0.4; }
 #shortcuts-container {
   display: grid;
   justify-content: start;
+  grid-template-columns: repeat(auto-fill, minmax(68px, 76px));
+  gap: 5px;
+
 }
 
 .sc-item {
