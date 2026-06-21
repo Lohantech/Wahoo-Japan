@@ -380,7 +380,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
 #nav-logo:hover { opacity:.85; }
 
 #logo {
-  height:40px; object-fit:contain;
+  height:50px; 
   filter:drop-shadow(0 1px 4px rgba(255,102,0,.20));
 }
 
