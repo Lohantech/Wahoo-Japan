@@ -45,3 +45,4 @@ The footer consists of a text showing the project's timeline up to the present d
 **Thank you for reading and for visiting our GitHub repository, our main web page, and our help site. We also extend our deepest gratitude to the Japanese community and everyone else who supported and believed in this project.**
 
 **Wishing you the very best experience, filled with emotion, magic, and a touch of nostalgia!**
+**MACHIKOTO loves Japan and fully supports it! ❤️**
