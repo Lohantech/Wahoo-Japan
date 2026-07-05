@@ -18,16 +18,16 @@ In the top bar, you can find various information. On the left, 4 shortcuts let y
 
 *Personalization:*
 ![Personalization](READMEp/personalization.png)
-Click the "+" icon to add your own shortcuts to the homepage, which will then appear on the main dashboard. To delete them, return to this menu and click the "X" on the right side of the shortcut you want to remove.
-You can choose from 4 seasonal themes plus a default option with no animation. Selecting one of the 4 seasons triggers themed emojis to fall across your background, and changes the color of both clocks (the center clock and the top-right clock) to match the chosen theme. If the default theme is active, the background color adjusts accordingly.
-You have 5 pre-installed wallpapers ready to use, alongside a default one when you first use our service. Note that the T1 theme features an orange image, which represents our project's logo.
-You also have 5 free slots available to upload your own images as you wish, and you can delete them whenever you need to clear space.
+1. Click the "+" icon to add your own shortcuts to the homepage, which will then appear on the main dashboard. To delete them, return to this menu and click the "X" on the right side of the shortcut you want to remove.
+2. You can choose from 4 seasonal themes plus a default option with no animation. Selecting one of the 4 seasons triggers themed emojis to fall across your background, and changes the color of both clocks (the center clock and the top-right clock) to match the chosen theme. If the default theme is active, the background color adjusts accordingly.
+3. You have 5 pre-installed wallpapers ready to use, alongside a default one when you first use our service. Note that the T1 theme features an orange image, which represents our project's logo.
+4. You also have 5 free slots available to upload your own images as you wish, and you can delete them whenever you need to clear space.
 
 *Settings:*
 ![Personalization](READMEp/settings.png)
-Choose your favorite search engine to use with the top search bar. While Google is the default option, you can select other engines like Yahoo! JAPAN—which we used in this example (the selected engine is indicated by an orange indicator bar on the left and a bolded name), Microsoft's Bing, DuckDuckGo, or Ecosia. If none of these suit you, you can add a custom one by clicking "*Other engines...*" (*他のエンジン…*) and following the instructions.
-Select the time zone corresponding to your region. If you are Japanese or living in Japan, it defaults to the Asia/Tokyo time zone. Otherwise, you can pick your time zone from any available region in the world.
-You can completely export your setup and personalization configuration into a .json file (a JavaScript-coded file). Use the import button directly beneath the export option to load it onto any browser, device, or support. This is highly useful if you plan to reset certain parameters, clear your cache and internal storage, or switch to a new device.
+1. Choose your favorite search engine to use with the top search bar. While Google is the default option, you can select other engines like Yahoo! JAPAN—which we used in this example (the selected engine is indicated by an orange indicator bar on the left and a bolded name), Microsoft's Bing, DuckDuckGo, or Ecosia. If none of these suit you, you can add a custom one by clicking "*Other engines...*" (*他のエンジン…*) and following the instructions.
+2. Select the time zone corresponding to your region. If you are Japanese or living in Japan, it defaults to the Asia/Tokyo time zone. Otherwise, you can pick your time zone from any available region in the world.
+3. You can completely export your setup and personalization configuration into a .json file (a JavaScript-coded file). Use the import button directly beneath the export option to load it onto any browser, device, or support. This is highly useful if you plan to reset certain parameters, clear your cache and internal storage, or switch to a new device.
 
 # Help:
 For more information, troubleshooting sections, questions, or to share your feedback and suggestions for improvement, you can click "*Help*" (*ヘルプ*) in the upper menu or look for "*❓Help*" in the footer, which will redirect you to the official Machikoto help website.
