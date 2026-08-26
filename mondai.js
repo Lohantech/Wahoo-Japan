@@ -97,6 +97,7 @@ document.addEventListener('click', e => {
 const ENGINES = {
   google:     { name:'Google',       url:'https://www.google.com/search?q={q}' },
   yahoojp:    { name:'Yahoo! JAPAN', url:'https://search.yahoo.co.jp/search?p={q}' },
+  yahoojp_chat: { name:'Yahoo! JAPAN AI検索 ', url:'https://search.yahoo.co.jp/chat/s/n?q={q}' },
   bing:       { name:'Bing',         url:'https://www.bing.com/search?q={q}' },
   duckduckgo: { name:'DuckDuckGo',   url:'https://duckduckgo.com/?q={q}' },
   ecosia:     { name:'Ecosia',       url:'https://www.ecosia.org/search?q={q}' },
@@ -105,7 +106,7 @@ const ENGINES = {
 let st = {
   lang:'auto', engine:'google', season:'default',
   wallpaper:'none', custom:null, panel:null,
-  timezone:'Europe/London', tzLocked:false,
+  timezone:'Asia/Tokyo', tzLocked:false,
   customSlots:[null,null,null,null,null],
   overlay:true,
   shortcuts:[],
