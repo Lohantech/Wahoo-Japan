@@ -654,7 +654,7 @@ body.season-hiver .particle     { opacity: 0.4; }
 	align-items: center;
 	padding: 5px 13px 9px;
 	border-radius: var(--r2);
-	background: rgba(255,255,255,.90);
+	background: var(--ff);
 	border: 1px solid var(--bd);
 	text-decoration: none;
 	color: var(--t1);
@@ -665,11 +665,10 @@ body.season-hiver .particle     { opacity: 0.4; }
 	max-width: 72px;
 	transition: background .15s, transform .13s, box-shadow .15s, color .13s;
 	cursor: pointer;
-	backdrop-filter: blur(6px);
-	-webkit-backdrop-filter: blur(6px);
 }
+
 .sc-item:hover {
-  background:#fff0e0;
+  background: var(--jw);
   color:var(--o);
 }
 
@@ -959,6 +958,11 @@ code.pill {
   display: none;
 }
 
+#shortcuts-header {
+  font-size: 9px;
+  gap: 20px;
+}
+
 #logo {
   height:20px; 
   filter:drop-shadow(0 1px 4px rgba(70, 146, 80,.20));
@@ -966,6 +970,10 @@ code.pill {
 
 .add-shortcut-small {
   font-size: 9px;
+}
+
+.sc-item {
+	background: none;
 }
 
 }
