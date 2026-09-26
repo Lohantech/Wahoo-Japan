@@ -192,7 +192,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
   transition:background .14s, color .14s;
   white-space:nowrap;
 }
-.hbtn:hover  { background:var(--panel); color:var(--o); }
+.hbtn:hover  { background:var(--panel); color:var(--o2); }
 .hbtn:active { transform:scale(.95); }
 
 
@@ -544,8 +544,11 @@ body.season-hiver     #clock { color:#3b8cff; text-shadow:0 2px 14px rgba(147,19
 }
 
 .welcome-phrase {
-  font-size:13px; font-weight:600; color:var(--o2);
-  margin-top:4px; letter-spacing:.6px; opacity:.9;
+  font-size:15px; 
+  font-weight:700; 
+  color:#3F91B8;
+  margin-top:4px; 
+  letter-spacing:.6px; 
 }
 
 #services-bar {
@@ -898,7 +901,7 @@ code.pill {
   gap: 4px;
 
 }
-.drw-tab:hover {color: var(--o); background: var(--panel);}
+.drw-tab:hover {color: var(--o2); background: var(--panel);}
 .drw-tab.active { color: var(--o); border-bottom-color: var(--bd2); background: var(--panel); }
 
 #drawer-close-btn {
