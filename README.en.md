@@ -1,6 +1,6 @@
 # Machikoto
 
-[English](./README.md) | [日本語](./README.ja.md)
+[日本語](./README.ja.md) | [English](./README.en.md)
 
 > *EN: Presentation of the MACHIKOTO Customizable Homepage*
 
