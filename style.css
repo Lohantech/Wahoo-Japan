@@ -152,7 +152,7 @@ body.has-wallpaper #season-overlay { opacity:var(--overlay-intensity,.70); z-ind
 }
 
 /* ═══════════════════════════════════════
-   TOPBAR 1 — liens + panneaux
+   TOPBAR 1 — links + panels
 ═══════════════════════════════════════ */
 #topbar {
   position:relative; z-index:201;
@@ -786,7 +786,7 @@ code.pill {
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE — tablette
+   RESPONSIVE — tablet
 ═══════════════════════════════════════ */
 @media (max-width:840px) {
   #nav-bar { padding:8px 14px; gap:10px; }
@@ -836,7 +836,7 @@ code.pill {
 }
 
 /* ═══════════════════════════════════════
-   DRAWER COULISSANT
+   SLIDING DRAWER
 ═══════════════════════════════════════ */
 #drawer-overlay {
   position: fixed;
@@ -879,7 +879,6 @@ code.pill {
 
 #drawer-tabs { display: flex; 
   flex: 1;
-  /*gap: 4px;*/
  }
 
 .drw-tab {
@@ -887,7 +886,6 @@ code.pill {
   padding: 11px 8px;
   background: none;
   border: none;
-  /*border-radius: 10px;*/
   cursor: pointer;
   font-family: inherit;
   font-size: 12px;
