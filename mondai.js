@@ -160,13 +160,13 @@ function togglePanel(n) { openDrawer(n); }
 function closeAll() { closeDrawer(); }
 
 /* ═══════════════════════════════════════════════════
-   LANGUE
+   LANGUAGE
 ═══════════════════════════════════════════════════ */
 function setLang(lang, el) {
   st.lang = lang;
   document.querySelectorAll('[data-lang]').forEach(r => r.classList.remove('sel'));
   if (el) el.classList.add('sel');
-  if (!st.tzLocked) st.timezone = lang === 'ja' ? 'Asia/Tokyo' : 'Europe/London';
+  if (!st.tzLocked) st.timezone = 'Asia/Tokyo';
   updateTZLabel();
   applyLang();
   save();
@@ -194,7 +194,7 @@ function applyLang() {
 }
 
 /* ═══════════════════════════════════════════════════
-   HORLOGE
+   CLOCK
 ═══════════════════════════════════════════════════ */
 function updateClock() {
   const tz = st.timezone, now = new Date();
@@ -254,7 +254,7 @@ function updateWelcomePhrase() {
 }
 
 /* ═══════════════════════════════════════════════════
-   Engine
+   ENGINE
 ═══════════════════════════════════════════════════ */
 function setEng(el) {
   document.querySelectorAll('[data-eng]').forEach(r => r.classList.remove('sel'));
@@ -309,7 +309,7 @@ function handleInput() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SAISON + PARTICULES
+   SEASON + PARTICLES
 ═══════════════════════════════════════════════════ */
 const SP = {
   default:   [],
@@ -347,7 +347,7 @@ function spawnParticles(s) {
 }
 
 /* ═══════════════════════════════════════════════════
-   FOND D'ÉCRAN 
+   BACKGROUND 
 ═══════════════════════════════════════════════════ */
 function setWP(wp, el) {
   document.querySelectorAll('.wp-t,.cslot').forEach(t => t.classList.remove('sel'));
@@ -365,7 +365,7 @@ function setWP(wp, el) {
 }
 
 /* ═══════════════════════════════════════════════════
-   SLOTS PHOTOS PERSO
+   PERSONAL PHOTO SLOTS
 ═══════════════════════════════════════════════════ */
 function renderCustomSlots() {
   const grid = document.getElementById('custom-slots-grid');
@@ -534,7 +534,7 @@ function applyState(d) {
 }
 
 /* ═══════════════════════════════════════════════════
-   RACCOURCIS
+   SHORTCUTS
 ═══════════════════════════════════════════════════ */
 let _scIconData = null;
 
