@@ -139,7 +139,7 @@ function openDrawer(tab) {
   _drawerOpen = true;
   document.getElementById('drawer').classList.add('open');
   document.getElementById('drawer-overlay').classList.add('show');
-  switchDrawerTab(tab || 'perso');
+  switchDrawerTab(tab || 'customize');
 }
 
 function closeDrawer() {
@@ -150,8 +150,8 @@ function closeDrawer() {
 
 function switchDrawerTab(tab) {
   document.querySelectorAll('.drw-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  document.getElementById('drw-perso').classList.toggle('hidden', tab !== 'perso');
-  document.getElementById('drw-param').classList.toggle('hidden', tab !== 'param');
+  document.getElementById('drw-customize').classList.toggle('hidden', tab !== 'customize');
+  document.getElementById('drw-settings').classList.toggle('hidden', tab !== 'settings');
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });

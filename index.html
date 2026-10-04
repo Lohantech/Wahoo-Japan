@@ -28,11 +28,11 @@
     </div>
 
     <div id="tb-right">
-      <button class="hbtn" onclick="openDrawer('perso')" title="Personnaliser">
-        <img src="aero_touch/art.png" alt="Personnalise" style="width:20px;height:20px">
-        <span data-t="persoBtn">パーソナライズ</span>
+      <button class="hbtn" onclick="openDrawer('customize')" title="Customize">
+        <img src="aero_touch/art.png" alt="Customize" style="width:20px;height:20px">
+        <span data-t="customizeBtn">パーソナライズ</span>
       </button>
-      <button class="hbtn" onclick="openDrawer('param')" title="Settings">
+      <button class="hbtn" onclick="openDrawer('settings')" title="Settings">
         <img src="aero_touch/re.png" alt="Settings" style="width:20px;height:20px">
         <span data-t="settingsBtn">設定</span>
       </button>
@@ -147,18 +147,18 @@
 <div id="drawer">
   <div id="drawer-head">
     <div id="drawer-tabs">
-      <button class="drw-tab active" data-tab="perso" onclick="switchDrawerTab('perso')">
-        <img src="aero_touch/art.png" alt="Personnalise" style="width:20px;height:20px;">
-        <span data-t="persoBtn">パーソナライズ</span></button>
-      <button class="drw-tab" data-tab="param" onclick="switchDrawerTab('param')">
-        <img src="aero_touch/re.png" alt="Personnaliser" style="width:20px;height:20px"> 
+      <button class="drw-tab active" data-tab="customize" onclick="switchDrawerTab('customize')">
+        <img src="aero_touch/art.png" alt="Customize" style="width:20px;height:20px;">
+        <span data-t="customizeBtn">パーソナライズ</span></button>
+      <button class="drw-tab" data-tab="settings" onclick="switchDrawerTab('settings')">
+        <img src="aero_touch/re.png" alt="Settings" style="width:20px;height:20px"> 
         <span data-t="settingsBtn">設定</span></button>
     </div>
     <button id="drawer-close-btn" onclick="closeDrawer()" title="Fermer">x</button>
   </div>
   <div id="drawer-body">
 
-    <div id="drw-perso" class="drw-section">
+    <div id="drw-customize" class="drw-section">
       <div class="dtitle" data-t="shortcutsTitle">マイショートカット</div>
       <div id="shortcuts-list"></div>
       <button class="action-row" id="add-shortcut-btn" onclick="openShortcutModal()">
@@ -203,7 +203,7 @@
       <input type="file" id="slot-file" accept="image/*" style="display:none" onchange="onSlotFile(event)">
     </div>
 
-    <div id="drw-param" class="drw-section hidden">
+    <div id="drw-settings" class="drw-section hidden">
       <div class="dtitle" data-t="engineTitle">検索エンジン</div>
       <div class="opt sel" data-eng="google" onclick="setEng(this)"><span class="dot"></span>Google</div>
       <div class="opt" data-eng="yahoojp" onclick="setEng(this)"><span class="dot"></span>Yahoo! JAPAN</div>
