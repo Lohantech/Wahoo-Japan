@@ -97,7 +97,7 @@ document.addEventListener('click', e => {
 const ENGINES = {
   yahoojp:    { name:'Yahoo! JAPAN', url:'https://search.yahoo.co.jp/search?p={q}' },
   yahoojp_chat: { name:'Yahoo! JAPAN AI検索 ', url:'https://search.yahoo.co.jp/chat/s/n?q={q}' },
-  chappie: { name:'チャットGPT',      url:'https://chatgpt.com/?q={q}&hints=search' },
+  chappie:      { name:'チャットGPT AI検索',     url:'https://chatgpt.com/?q={q}&hints=search' },
   google:     { name:'Google',       url:'https://www.google.com/search?q={q}' },
   bing:       { name:'Bing',         url:'https://www.bing.com/search?q={q}' },
   duckduckgo: { name:'DuckDuckGo',   url:'https://duckduckgo.com/?q={q}' },
@@ -163,7 +163,7 @@ function closeAll() { closeDrawer(); }
    LANGUAGE
 ═══════════════════════════════════════════════════ */
 function setLang(lang, el) {
-  st.lang = lang;
+  st.lang = 'ja';
   document.querySelectorAll('[data-lang]').forEach(r => r.classList.remove('sel'));
   if (el) el.classList.add('sel');
   if (!st.tzLocked) st.timezone = 'Asia/Tokyo';
@@ -173,8 +173,8 @@ function setLang(lang, el) {
 }
 
 function applyLang() {
-  const L = T[st.lang];
-  document.documentElement.lang = st.lang = 'ja' ;
+  const L = T['ja'];
+  document.documentElement.lang ='ja' ;
   document.querySelectorAll('[data-t]').forEach(el => {
     const k = el.getAttribute('data-t');
     if (L[k] !== undefined) el.textContent = L[k];
@@ -207,7 +207,7 @@ function updateClock() {
     if (clockEl) clockEl.textContent = `${get('hour')}:${get('minute')}:${get('second')}`;
 
     const ld = new Date(now.toLocaleString('en-US', { timeZone: tz }));
-    const dateStr = T[st.lang].dateFn(ld);
+    const dateStr = T['ja'].dateFn(ld);
     const dateEl = document.getElementById('date-line');
     if (dateEl) dateEl.textContent = dateStr;
 
@@ -221,7 +221,7 @@ function updateClock() {
       new Intl.DateTimeFormat('en-GB', { timeZone:tz, hour:'numeric', hour12:false }).format(now),
       10
     );
-    const L = T[st.lang];
+    const L = T['ja'];
     const greetEl = document.getElementById('greeting');
     if (greetEl) greetEl.textContent =
       h >= 5 && h < 12 ? L.greetMorn :
@@ -242,7 +242,7 @@ function updateWelcomePhrase() {
       new Intl.DateTimeFormat('en-GB', { timeZone: st.timezone, hour: 'numeric', hour12: false }).format(new Date()),
       10
     );
-    const L = T[st.lang];
+    const L = T['ja'];
     let phrase = '';
     if      (h >= 5 && h < 12) phrase = L.welcomeMorn;
     else if (h < 17)           phrase = L.welcomeAfter;
@@ -434,7 +434,7 @@ function deleteSlot(evt, i) {
 ═══════════════════════════════════════════════════ */
 function exportSave() {
   const payload = {
-    engine:st.engine, lang:st.lang, season:st.season,
+    engine:st.engine, lang: 'ja', season:st.season,
     wallpaper:st.wallpaper, custom:st.custom,
     timezone:st.timezone, tzLocked:st.tzLocked,
     customSlots:st.customSlots,
@@ -499,13 +499,13 @@ function applyState(d) {
     });
   }
   if (d.lang) {
-    st.lang = d.lang;
-    const el = document.querySelector(`[data-lang="${d.lang}"]`);
+    st.lang = 'ja';
+    const el = document.querySelector(`[data-lang='ja']`);
     if (el) { document.querySelectorAll('[data-lang]').forEach(r => r.classList.remove('sel')); el.classList.add('sel'); }
   }
   st.tzLocked = !!d.tzLocked;
   if (d.timezone) st.timezone = d.timezone;
-  else if (!st.tzLocked) st.timezone = st.lang === 'ja' ? 'Asia/Tokyo' : 'Europe/London';
+  else if (!st.tzLocked) st.timezone = 'Asia/Tokyo';
   updateTZLabel();
   if (d.engine) {
     st.engine = d.engine;
