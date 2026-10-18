@@ -95,16 +95,16 @@ document.addEventListener('click', e => {
    STATE
 ═══════════════════════════════════════════════════ */
 const ENGINES = {
-  google:     { name:'Google',       url:'https://www.google.com/search?q={q}' },
   yahoojp:    { name:'Yahoo! JAPAN', url:'https://search.yahoo.co.jp/search?p={q}' },
   yahoojp_chat: { name:'Yahoo! JAPAN AI検索 ', url:'https://search.yahoo.co.jp/chat/s/n?q={q}' },
+  chappie: { name:'チャットGPT',      url:'https://chatgpt.com/?q={q}&hints=search' },
+  google:     { name:'Google',       url:'https://www.google.com/search?q={q}' },
   bing:       { name:'Bing',         url:'https://www.bing.com/search?q={q}' },
   duckduckgo: { name:'DuckDuckGo',   url:'https://duckduckgo.com/?q={q}' },
-  ecosia:     { name:'Ecosia',       url:'https://www.ecosia.org/search?q={q}' },
 };
 
 let st = {
-  lang:'auto', engine:'google', season:'default',
+  lang:'ja', engine:'yahoojp', season:'default',
   wallpaper:'none', custom:null, panel:null,
   timezone:'Asia/Tokyo', tzLocked:false,
   customSlots:[null,null,null,null,null],
@@ -285,9 +285,9 @@ function saveCustomEng() {
    SEARCH
 ═══════════════════════════════════════════════════ */
 function buildURL(q) {
-  const l = st.lang === 'ja' ? 'ja' : 'en';
+  const l = 'ja';
   const e = ENGINES[st.engine] || st.custom;
-  if (!e) return 'https://www.google.com/search?q=' + encodeURIComponent(q);
+  if (!e) return 'https://search.yahoo.co.jp/search?p=' + encodeURIComponent(q);
   return e.url.replace('{q}', encodeURIComponent(q)).replace(/{l}/g, l);
 }
 
