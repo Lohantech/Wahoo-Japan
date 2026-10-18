@@ -25,7 +25,7 @@ In the top bar, you can find various information. On the left, 4 shortcuts let y
 
 *Settings:*
 ![Personalization](READMEp/settings.png)
-1. Choose your favorite search engine to use with the top search bar. While Google is the default option, you can select other engines like Yahoo! JAPAN—which we used in this example (the selected engine is indicated by an orange indicator bar on the left and a bolded name), Microsoft's Bing, DuckDuckGo, or Ecosia. If none of these suit you, you can add a custom one by clicking "*Other engines...*" (*他のエンジン…*) and following the instructions.
+1. Choose your favorite search engine to use with the top search bar. While Yahoo! JAPAN is the default option, you can select other engines like Yahoo! JAPAN—which we used in this example (the selected engine is indicated by an orange indicator bar on the left and a bolded name), Yahoo! JAPAN AI, ChatGPT AI, Google, Microsoft's Bing or DuckDuckGo. If none of these suit you, you can add a custom one by clicking "*Other engines...*" (*他のエンジン…*) and following the instructions.
 2. Select the time zone corresponding to your region. If you are Japanese or living in Japan, it defaults to the Asia/Tokyo time zone. Otherwise, you can pick your time zone from any available region in the world.
 3. You can completely export your setup and personalization configuration into a .json file (a JavaScript-coded file). Use the import button directly beneath the export option to load it onto any browser, device, or support. This is highly useful if you plan to reset certain parameters, clear your cache and internal storage, or switch to a new device.
 
